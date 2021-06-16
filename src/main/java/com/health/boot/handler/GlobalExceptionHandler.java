@@ -13,6 +13,9 @@ import com.health.boot.exceptions.AppointmentExistException;
 import com.health.boot.exceptions.AppointmentNotFoundException;
 import com.health.boot.exceptions.PatientExistException;
 import com.health.boot.exceptions.PatientNotFoundException;
+import com.health.boot.exceptions.UserNotFoundException;
+import com.health.boot.exceptions.UserAlreadyExistException;
+import com.health.boot.exceptions.UserIdPasswordInvalidException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
