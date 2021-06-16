@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.health.boot.exceptions.AppointmentExistException;
 import com.health.boot.exceptions.AppointmentNotFoundException;
+import com.health.boot.exceptions.PatientExistException;
 import com.health.boot.exceptions.PatientNotFoundException;
 
 @ControllerAdvice
@@ -52,4 +53,15 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.NOT_FOUND);
 	}
+	 @ExceptionHandler(PatientExistException.class)
+	    public ResponseEntity<Object> handlePatientExistException(PatientExistException pe){
+	       
+	        Map<String,Object> errors = new LinkedHashMap<>();
+	       
+	        errors.put("Error", "Patient Already Exist");
+	        errors.put("Message", pe.getMessage());
+	        errors.put("Time", LocalDateTime.now());
+	       
+	        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	    }
 }
