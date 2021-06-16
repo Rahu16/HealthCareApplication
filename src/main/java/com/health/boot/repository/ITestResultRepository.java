@@ -1,4 +1,4 @@
-package com.health.boot.repo;
+package com.health.boot.repository;
 
 
 
