@@ -11,11 +11,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.health.boot.exceptions.AppointmentExistException;
 import com.health.boot.exceptions.AppointmentNotFoundException;
+import com.health.boot.exceptions.DiagnosticCenterAlReadyExistsException;
+import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
 import com.health.boot.exceptions.PatientExistException;
 import com.health.boot.exceptions.PatientNotFoundException;
+
 import com.health.boot.exceptions.UserNotFoundException;
 import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;
+
+import com.health.boot.exceptions.UserAlreadyExistException;
+import com.health.boot.exceptions.UserIdPasswordInvalidException;
+import com.health.boot.exceptions.UserNotFoundException;
+
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -105,4 +113,29 @@ public class GlobalExceptionHandler {
 	       
 	        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 	    }
+	 
+		@ExceptionHandler(DiagnosticCenterNotFoundException.class)
+		public ResponseEntity<Object> handleDiagnosticCenterException(DiagnosticCenterNotFoundException dc){
+			
+			Map<String,Object> errors = new LinkedHashMap<>();
+			
+			errors.put("Error", "There is No DiagnosticCenter Found");
+			errors.put("Message", dc.getMessage());
+			errors.put("Time", LocalDateTime.now());
+			
+			return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+		}
+		
+		@ExceptionHandler(DiagnosticCenterAlReadyExistsException.class)
+		public ResponseEntity<Object> handleDiagnosticCenterException(DiagnosticCenterAlReadyExistsException de){
+			
+			Map<String,Object> errors = new LinkedHashMap<>();
+			
+			errors.put("Error", "There is Already a DiagnosticCenter");
+			errors.put("Message", de.getMessage());
+			errors.put("Time", LocalDateTime.now());
+			
+			return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+			
+		}
 }
