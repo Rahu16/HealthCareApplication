@@ -31,6 +31,8 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 		Optional<Appointment> appoint = ar.findById(appointment.getId());
 		if(appoint.isPresent())
 			throw new AppointmentExistException("Appointment with Same Id is found");
+		Patient p = pr.findById(appoint.get().getPatient().getPatientId()).get();
+		pr.save(p);
 		return ar.save(appointment);
 	}
 
@@ -66,9 +68,13 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	@Override
 	public Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException {
 		Optional<Appointment> appoint = ar.findById(appointment.getId());
-		if(appoint.isPresent())
-			return ar.save(appointment);
-		throw new AppointmentNotFoundException("Appointment Not Found to Update");
+		if(appoint.isEmpty())
+			throw new AppointmentNotFoundException("Appointment Not Found to Update");
+		Patient p = pr.findById(appoint.get().getPatient().getPatientId()).get();
+		Appointment a = ar.save(appointment);
+		pr.save(p);
+		return a;
+
 	}
 
 	@Override

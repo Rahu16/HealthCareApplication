@@ -20,9 +20,7 @@ import com.health.boot.exceptions.UserNotFoundException;
 import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;
 
-import com.health.boot.exceptions.UserAlreadyExistException;
-import com.health.boot.exceptions.UserIdPasswordInvalidException;
-import com.health.boot.exceptions.UserNotFoundException;
+
 
 
 @ControllerAdvice

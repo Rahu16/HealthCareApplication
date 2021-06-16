@@ -112,7 +112,7 @@ public class Appointment {
 
 	
 	public void addTestResult(TestResult t) {
-		t.setAppointment(this);			//this will avoid nested cascade
+		//this will avoid nested cascade
 		System.out.println(t);
 		this.getTestResult().add(t);
 	}
