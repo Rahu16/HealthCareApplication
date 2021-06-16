@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
+/// User Entity is Created
 @Entity
 @Table(name= "Customers")
 public class User{
