@@ -10,7 +10,7 @@ import com.health.boot.entities.User;
 import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;
 import com.health.boot.exceptions.UserNotFoundException;
-import com.health.boot.repo.UserRepository;
+import com.health.boot.repository.UserRepository;
 
 @Service
 public class IUserServiceImpl implements IUserService {
