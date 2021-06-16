@@ -11,10 +11,49 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.health.boot.exceptions.AppointmentExistException;
 import com.health.boot.exceptions.AppointmentNotFoundException;
+import com.health.boot.exceptions.PatientExistException;
 import com.health.boot.exceptions.PatientNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<Object> handleEmployeeNotFoundException(UserNotFoundException ux){
+		
+		Map<String,Object> errors = new LinkedHashMap<>();
+		
+		errors.put("Error", "Not Found");
+		errors.put("Message", ux.getMessage());
+		errors.put("Time", LocalDateTime.now());
+		
+		return new ResponseEntity<Object>(errors, HttpStatus.NOT_FOUND);
+		
+	}
+	
+	@ExceptionHandler(UserAlreadyExistException.class)
+	public ResponseEntity<Object> handleEmployeeNotFoundException(UserAlreadyExistException ux){
+		
+		Map<String,Object> errors = new LinkedHashMap<>();
+		
+		errors.put("Error", "User Already Exist");
+		errors.put("Message", ux.getMessage());
+		errors.put("Time", LocalDateTime.now());
+		
+		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@ExceptionHandler(UserIdPasswordInvalidException.class)
+	public ResponseEntity<Object> handleEmployeeNotFoundException(UserIdPasswordInvalidException uv){
+		
+		Map<String,Object> errors = new LinkedHashMap<>();
+		
+		errors.put("Error", "Password is not matching");
+		errors.put("Message", uv.getMessage());
+		errors.put("Time", LocalDateTime.now());
+		
+		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	}
 	
 	@ExceptionHandler(AppointmentExistException.class)
 	public ResponseEntity<Object> handleAppointmentExistException(AppointmentExistException ae){
@@ -52,4 +91,15 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.NOT_FOUND);
 	}
+	 @ExceptionHandler(PatientExistException.class)
+	    public ResponseEntity<Object> handlePatientExistException(PatientExistException pe){
+	       
+	        Map<String,Object> errors = new LinkedHashMap<>();
+	       
+	        errors.put("Error", "Patient Already Exist");
+	        errors.put("Message", pe.getMessage());
+	        errors.put("Time", LocalDateTime.now());
+	       
+	        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	    }
 }
