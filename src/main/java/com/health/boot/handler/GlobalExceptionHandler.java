@@ -17,7 +17,8 @@ import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
 import com.health.boot.exceptions.DiagnosticTestNotFoundException;
 import com.health.boot.exceptions.PatientExistException;
 import com.health.boot.exceptions.PatientNotFoundException;
-
+import com.health.boot.exceptions.TestResultExistException;
+import com.health.boot.exceptions.TestResultNotFoundException;
 import com.health.boot.exceptions.UserNotFoundException;
 import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;
@@ -138,6 +139,7 @@ public class GlobalExceptionHandler {
 			return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 			
 		}
+
 	@ExceptionHandler(AllreadyDiagnosticTestExistException.class)
 	public ResponseEntity<Object> handleDiagnosticTestException(AllreadyDiagnosticTestExistException ad){
 		
@@ -161,4 +163,31 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 	}
+	
+	
+	@ExceptionHandler(TestResultExistException.class)
+	public ResponseEntity<Object> handleTestResultException(TestResultExistException tr){
+		
+		Map<String,Object> errors = new LinkedHashMap<>();
+		
+		errors.put("Error", "test result exists");
+		errors.put("Message", tr.getMessage());
+		errors.put("Time", LocalDateTime.now());
+		
+		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@ExceptionHandler(TestResultNotFoundException.class)
+	public ResponseEntity<Object> handleTestResultNotFoundException(TestResultNotFoundException te){
+		
+		Map<String,Object> errors = new LinkedHashMap<>();
+		
+		errors.put("Error", "test result Not Found");
+		errors.put("Message", te.getMessage());
+		errors.put("Time", LocalDateTime.now());
+		
+		return new ResponseEntity<Object>(errors, HttpStatus.NOT_FOUND);
+	}
+	
 }
