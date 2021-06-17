@@ -31,7 +31,7 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 		Optional<Appointment> appoint = ar.findById(appointment.getId());
 		if(appoint.isPresent())
 			throw new AppointmentExistException("Appointment with Same Id is found");
-		Patient p = pr.findById(appoint.get().getPatient().getPatientId()).get();
+		Patient p = pr.findById(appointment.getPatient().getPatientId()).get();
 		pr.save(p);
 		return ar.save(appointment);
 	}
