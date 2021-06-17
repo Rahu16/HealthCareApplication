@@ -18,6 +18,7 @@ import com.health.boot.entities.DiagnosticTest;
 import com.health.boot.exceptions.DiagnosticCenterAlReadyExistsException;
 import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
 import com.health.boot.exceptions.DiagnosticTestNotFoundException;
+import com.health.boot.repository.AppointmentRepository;
 //import com.health.boot.repository.AppointmentRepository;
 import com.health.boot.repository.DiagnosticCenterRepository;
 import com.health.boot.repository.DiagnosticTestRepository;
@@ -28,8 +29,9 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 	DiagnosticCenterRepository dcr;
 	@Autowired
 	DiagnosticTestRepository dtr;
-//	@Autowired
-//	AppointmentRepository apr;
+	
+	@Autowired
+	AppointmentRepository ar;
 	
 	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenters(){
@@ -118,19 +120,18 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 		throw new DiagnosticTestNotFoundException("Test not found with name as "+testName+" in the center.");
 	}
 	
-//	@Override
-//	public List<Appointment> getListOfAppointments(String centerName){
-//		List<Appointment> list=new ArrayList<>();
-//		List<Appointment> list2=apr.findAll();
-//		for(Appointment a:list2) {
-//			String name=a.getDiagnosticCenter().getName();
-//			if(name==centerName) {
-//				list.add(a);
-//			}
-//		}
-//		
-//		return list;
-//	}
+	@Override
+	public List<Appointment> getListOfAppointments(String centerName){
+		List<Appointment> list=new ArrayList<>();
+		List<Appointment> list2=ar.findAll();
+		for(Appointment a:list2) {
+			String name=a.getDiagnosticCenter().getName();
+			if(name==centerName) {
+				list.add(a);
+			}
+		}	
+		return list;
+	}
 	
 }
 

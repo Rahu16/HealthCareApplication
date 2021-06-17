@@ -17,7 +17,8 @@ import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
 import com.health.boot.exceptions.DiagnosticTestNotFoundException;
 import com.health.boot.exceptions.PatientExistException;
 import com.health.boot.exceptions.PatientNotFoundException;
-
+import com.health.boot.exceptions.TestResultExistException;
+import com.health.boot.exceptions.TestResultNotFoundException;
 import com.health.boot.exceptions.UserNotFoundException;
 import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;

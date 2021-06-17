@@ -26,21 +26,31 @@ public class Appointment {
 	private LocalDate appointmentDate;
 	private ApprovalStatus approvalStatus;
 	
-//	@OneToMany(targetEntity = DiagnosticTest.class, fetch = FetchType.LAZY)
-//	private Set<DiagnosticTest> diagnosticTests;
+	@OneToMany(targetEntity = DiagnosticTest.class, fetch = FetchType.LAZY)
+	private Set<DiagnosticTest> diagnosticTests;
 	
 	@ManyToOne(targetEntity = Patient.class, fetch = FetchType.LAZY)
 	@JoinColumn(name="patientid",referencedColumnName = "patientId")
 	private Patient patient;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="diago_center")
-//	private DiagnosticCenter diagnosticCenter;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="diago_center")
+	private DiagnosticCenter diagnosticCenter;
 	
 	@OneToMany(targetEntity = TestResult.class, mappedBy = "appointment", fetch = FetchType.LAZY)
 	private Set<TestResult> testResult;
 	
 	
+	
+	public Appointment(int id, LocalDate appointmentDate, ApprovalStatus approvalStatus, Patient patient,
+			Set<TestResult> testResult) {
+		super();
+		this.id = id;
+		this.appointmentDate = appointmentDate;
+		this.approvalStatus = approvalStatus;
+		this.patient = patient;
+		this.testResult = testResult;
+	}
 	
 
 	public Appointment() {
@@ -56,18 +66,6 @@ public class Appointment {
 
 
 	public void setTestResult(Set<TestResult> testResult) {
-		this.testResult = testResult;
-	}
-
-
-
-	public Appointment(int id, LocalDate appointmentDate, ApprovalStatus approvalStatus, Patient patient,
-			Set<TestResult> testResult) {
-		super();
-		this.id = id;
-		this.appointmentDate = appointmentDate;
-		this.approvalStatus = approvalStatus;
-		this.patient = patient;
 		this.testResult = testResult;
 	}
 
@@ -114,15 +112,41 @@ public class Appointment {
 
 
 	
+
+	public Set<DiagnosticTest> getDiagnosticTests() {
+		return diagnosticTests;
+	}
+
+
+
+	public void setDiagnosticTests(Set<DiagnosticTest> diagnosticTests) {
+		this.diagnosticTests = diagnosticTests;
+	}
+
+
+
+	public DiagnosticCenter getDiagnosticCenter() {
+		return diagnosticCenter;
+	}
+
+
+
+	public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
+		this.diagnosticCenter = diagnosticCenter;
+	}
+
+
+
+	public void addDiagnosticTest(DiagnosticTest dTest) {			//this will avoid nested cascade
+		this.getDiagnosticTests().add(dTest);
+	}
+	
 	public void addTestResult(TestResult t) {
 		//this will avoid nested cascade
 		System.out.println(t);
 		this.getTestResult().add(t);
 	}
-//	
-//	public void addDiagnosticTest(DiagnosticTest dTest) {			//this will avoid nested cascade
-//		this.getDiagnosticTests().add(dTest);
-//	}
+	
 
 
 

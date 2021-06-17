@@ -21,8 +21,7 @@ public interface IDiagnosticCenterService {
 	DiagnosticCenter getDiagnosticCenterByName(String centername);
 	String removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException;
 	DiagnosticTest viewTestDetails(int centerId, String testname);
-	
- // List<Appointment> getListOfAppointments(String centerName);
+	List<Appointment> getListOfAppointments(String centerName);
 	
 
 }

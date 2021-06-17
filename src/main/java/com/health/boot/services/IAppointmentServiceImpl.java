@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.health.boot.entities.Appointment;
@@ -44,7 +43,7 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 		Appointment appoint = app.get();
 		Patient p = appoint.getPatient();
 		p.getAppointments().remove(appoint);
-		Patient p1 = pr.save(p);
+		pr.save(p);
 		ar.delete(appoint);
 		return appoint;
 	}
