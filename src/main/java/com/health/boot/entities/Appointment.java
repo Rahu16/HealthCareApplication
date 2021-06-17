@@ -141,12 +141,6 @@ public class Appointment {
 		this.getDiagnosticTests().add(dTest);
 	}
 	
-	public void addTestResult(TestResult t) {
-		//this will avoid nested cascade
-		System.out.println(t);
-		this.getTestResult().add(t);
-	}
-	
 
 
 
