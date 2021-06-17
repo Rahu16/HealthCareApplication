@@ -1,6 +1,7 @@
 package com.health.boot.controllers;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,4 +51,15 @@ public class PatientController {
 		return as.addAppointment(a);
 	}
 
+	@GetMapping("{patientName}/{appointmentId}")
+	public String showAppointmentStatus(@PathVariable("patientId") String patientName,@PathVariable("appointmentId") int appointmentId) {
+		Patient p=ps.viewPatient(patientName);
+		Set<Appointment> set= as.viewAppointments(patientName);
+		for(Appointment a:set) {
+			if(a.getId()==appointmentId) {
+				return "Status is: "+a.getApprovalStatus();
+			}
+		}
+		return "No Appointment Found with id: "+appointmentId +" with Patient Name "+patientName;
+	}
 }
