@@ -136,4 +136,27 @@ public class GlobalExceptionHandler {
 			return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 			
 		}
+	@ExceptionHandler(AllreadyDiagnosticTestExistException.class)
+	public ResponseEntity<Object> handleDiagnosticTestException(AllreadyDiagnosticTestExistException ad){
+		
+		Map<String,Object> errors = new LinkedHashMap<>();
+		
+		errors.put("Error", "There is allready a DiagnosticTest");
+		errors.put("Message", ad.getMessage());
+		errors.put("Time", LocalDateTime.now());
+		
+		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(DiagnosticTestNotFoundException.class)
+	public ResponseEntity<Object> handleDiagnosticTestException(DiagnosticTestNotFoundException dn){
+		
+		Map<String,Object> errors = new LinkedHashMap<>();
+		
+		errors.put("Error", "There is No DiagnosticTest Found");
+		errors.put("Message", dn.getMessage());
+		errors.put("Time", LocalDateTime.now());
+		
+		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	}
 }
