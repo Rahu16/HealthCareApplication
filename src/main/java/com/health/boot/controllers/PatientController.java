@@ -21,6 +21,7 @@ import com.health.boot.entities.ApprovalStatus;
 import com.health.boot.entities.DiagnosticCenter;
 import com.health.boot.entities.DiagnosticTest;
 import com.health.boot.entities.Patient;
+import com.health.boot.entities.TestResult;
 import com.health.boot.exceptions.AppointmentNotFoundException;
 import com.health.boot.repository.AppointmentRepository;
 import com.health.boot.repository.PatientRepository;
@@ -28,6 +29,7 @@ import com.health.boot.services.IAppointmentService;
 import com.health.boot.services.IDiagnosticCenterServiceImpls;
 import com.health.boot.services.IDiagnosticTestServiceImpls;
 import com.health.boot.services.IPatientServiceImpl;
+import com.health.boot.services.ITestResultServiceImpl;
 
 
 @RestController
@@ -42,13 +44,13 @@ public class PatientController {
 	IAppointmentService as;
 	
 	@Autowired
-	PatientRepository pr;
-	
-	@Autowired
 	IDiagnosticCenterServiceImpls dcs;
 	
 	@Autowired
 	IDiagnosticTestServiceImpls dts;
+	
+	@Autowired
+	ITestResultServiceImpl trs;
 	
 
 	@PostMapping("/registerPatient")
@@ -106,5 +108,21 @@ public class PatientController {
 			}
 		}
 		throw new AppointmentNotFoundException("Appointment is Not Found to Delete");
+	}
+	
+	@GetMapping("/{patientId}/alltestresults")
+	public ResponseEntity<Set> getAllTestResult(@PathVariable("patientId") int id){
+		return new ResponseEntity<Set>(trs.viewResultsByPatient(ps.viewPatient(id)),HttpStatus.OK);
+	}
+	
+	@GetMapping("/{patientId}/{appointId}/alltestresults")
+	public ResponseEntity<?> getAllTestResultByAppointment(@PathVariable("patientId") int patientId, @PathVariable("appointId") int appointId){
+		ps.viewPatient(patientId);
+		Appointment a = as.viewAppointment(appointId);
+		if(a.getPatient().getPatientId()==patientId)
+			return new ResponseEntity<Set>(a.getTestResult(),HttpStatus.FOUND);
+		throw new AppointmentNotFoundException("Appointment Not Found For the Particular Patient");
+
+		
 	}
 }
