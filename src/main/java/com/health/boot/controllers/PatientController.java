@@ -77,44 +77,34 @@ public class PatientController {
 		return new ResponseEntity<Appointment>(as.addAppointment(a),HttpStatus.CREATED);
 	}
 
-<<<<<<< HEAD
 	@GetMapping("/{patientName}/{appointmentId}/showstatus")
 	public ResponseEntity<String> showAppointmentStatus(@PathVariable("patientName") String patientName,@PathVariable("appointmentId") int appointmentId) {
 		ps.viewPatient(patientName);
-=======
-	@GetMapping("{patientName}/{appointmentId}")
-	public String showAppointmentStatus(@PathVariable("patientName") String patientName,@PathVariable("appointmentId") int appointmentId) {
-		Patient p=ps.viewPatient(patientName);
->>>>>>> 25bf11f227864dea7344bfaedaa3f70e6f47a518
 		Set<Appointment> set= as.viewAppointments(patientName);
 		for(Appointment a:set) {
 			if(a.getId()==appointmentId) {
 				return new ResponseEntity<String>("Status is: "+a.getApprovalStatus(),HttpStatus.FOUND);
 			}
 		}
-<<<<<<< HEAD
 		throw new AppointmentNotFoundException("Appointment is Not Found to See the Status");
-=======
-		return "No Appointment Found with id: "+appointmentId +" under Patient Name "+patientName;
 	}
 	
-	@DeleteMapping("{patientName}/{appointmentId}")
-	public String cancelAppointment(@PathVariable("patientName") String patientName,@PathVariable("appointmentId") int appointmentId) {
-		Patient p=ps.viewPatient(patientName);
+	@DeleteMapping("/{patientName}/{appointmentId}")
+	public ResponseEntity<String> cancelAppointment(@PathVariable("patientName") String patientName,@PathVariable("appointmentId") int appointmentId) {
+		ps.viewPatient(patientName);
 		Set<Appointment> set= as.viewAppointments(patientName);
 		for(Appointment a:set) {
 			if(a.getId()==appointmentId) {
 				if(a.getApprovalStatus().equals("approved")) {
-					return "Can't Cancel Appointemnet Once It Is Approved";
+					return new ResponseEntity<String>("Can't Cancel Appointemnet Once It Is Approved",HttpStatus.FORBIDDEN);
 				}
 				else {
 					Appointment apt=as.viewAppointment(appointmentId);
 					as.removeAppointment(apt);
-					return "appointment deleted";
+					return new ResponseEntity<String>("appointment deleted",HttpStatus.ACCEPTED);
 				}
 			}
 		}
-		return "No Appointment Found with id: "+appointmentId +" under Patient Name "+patientName;
->>>>>>> 25bf11f227864dea7344bfaedaa3f70e6f47a518
+		throw new AppointmentNotFoundException("Appointment is Not Found to Delete");
 	}
 }
