@@ -1,4 +1,4 @@
-package com.health.boot.test;
+package com.health.boot;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +13,7 @@ import com.health.boot.exceptions.AllreadyDiagnosticTestExistException;
 import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
 import com.health.boot.exceptions.DiagnosticTestNotFoundException;
 import com.health.boot.repository.DiagnosticTestRepository;
-import com.health.boot.service.IDiagnosticTestService;
+import com.health.boot.services.IDiagnosticTestService;
 @SpringBootTest
 class DiagnosticTestJunitTest {
 
