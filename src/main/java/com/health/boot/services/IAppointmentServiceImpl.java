@@ -1,18 +1,24 @@
 package com.health.boot.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.health.boot.entities.Appointment;
+import com.health.boot.entities.ApprovalStatus;
+import com.health.boot.entities.DiagnosticTest;
 import com.health.boot.entities.Patient;
+import com.health.boot.entities.TestResult;
 import com.health.boot.exceptions.AppointmentExistException;
 import com.health.boot.exceptions.AppointmentNotFoundException;
 import com.health.boot.exceptions.PatientNotFoundException;
 import com.health.boot.repository.AppointmentRepository;
+import com.health.boot.repository.ITestResultRepository;
 import com.health.boot.repository.PatientRepository;
 
 @Service
@@ -23,6 +29,12 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	
 	@Autowired
 	PatientRepository pr;
+	
+	@Autowired
+	ITestResultRepository tr;
+	
+	@Autowired
+	IDiagnosticCenterService dcs;
 	
 	
 	@Override
@@ -77,9 +89,19 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	}
 
 	@Override
-	public List<Appointment> getApppointmentList(int centreId, String test, int status) throws RuntimeException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Appointment> getApppointmentList(int centreId, String test, ApprovalStatus status) throws RuntimeException {
+		List<Appointment> filteredAppointments = new ArrayList<>();
+		List<Appointment> list = ar.findAll();
+		List<Appointment> list1 = list.stream().filter(a->(a.getDiagnosticCenter().getId()==centreId && a.getApprovalStatus().equals(status)))
+				.collect(Collectors.toList());
+		for(Appointment a: list1) {
+			Set<DiagnosticTest> set = a.getDiagnosticTests();
+			for(DiagnosticTest t: set) {
+				if(t.getTestName()==test)
+					filteredAppointments.add(a);					
+			}
+		}
+		return filteredAppointments;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.health.boot.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,13 @@ public class  IPatientServiceImpl implements IPatientService{
 		if(p==null)
 			throw new PatientNotFoundException("Patient is Not Found TO View it.");
 		return p;
+	}
+	
+	public Patient viewPatient(int patientId) {		
+		Optional<Patient> p = pr.findById(patientId);
+		if(p.isEmpty())
+			throw new PatientNotFoundException("Patient is Not Found TO View it.");
+		return p.get();
 	}
 
 	@Override
