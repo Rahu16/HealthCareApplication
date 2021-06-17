@@ -1,4 +1,4 @@
-package com.health.boot.service;
+package com.health.boot.services;
 
 import java.util.ArrayList;
 import java.util.List;

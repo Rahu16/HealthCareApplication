@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.health.boot.exceptions.AllreadyDiagnosticTestExistException;
 import com.health.boot.exceptions.AppointmentExistException;
 import com.health.boot.exceptions.AppointmentNotFoundException;
 import com.health.boot.exceptions.DiagnosticCenterAlReadyExistsException;
 import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
+import com.health.boot.exceptions.DiagnosticTestNotFoundException;
 import com.health.boot.exceptions.PatientExistException;
 import com.health.boot.exceptions.PatientNotFoundException;
 
@@ -136,6 +138,7 @@ public class GlobalExceptionHandler {
 			return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 			
 		}
+
 	@ExceptionHandler(AllreadyDiagnosticTestExistException.class)
 	public ResponseEntity<Object> handleDiagnosticTestException(AllreadyDiagnosticTestExistException ad){
 		
