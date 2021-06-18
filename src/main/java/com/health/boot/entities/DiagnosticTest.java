@@ -133,5 +133,4 @@ public class DiagnosticTest
 			return "DiagnosticTest [id=" + id + ", testName=" + testName + ", testPrice=" + testPrice + ", normalValue="
 					+ normalValue + ", units=" + units + ", diagnosticCenters=" + diagnosticCenters + "]";
 		}
-
- 		}
+}
