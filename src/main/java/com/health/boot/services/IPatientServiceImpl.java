@@ -47,6 +47,12 @@ public class  IPatientServiceImpl implements IPatientService{
 			throw new PatientNotFoundException("Patient is Not Found TO View it.");
 		return p.get();
 	}
+	
+	public Patient removePatient(int pid) {
+		Patient p = viewPatient(pid);
+		pr.deleteById(pid);
+		return p;
+	}
 
 	@Override
 	public List<TestResult> getAllTestResult(String patientUserName) throws RuntimeException {
