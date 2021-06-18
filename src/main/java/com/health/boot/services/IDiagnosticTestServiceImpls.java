@@ -16,7 +16,8 @@ import com.health.boot.exceptions.DiagnosticTestNotFoundException;
 import com.health.boot.repository.DiagnosticCenterRepository;
 import com.health.boot.repository.DiagnosticTestRepository;
 @Service
-public class IDiagnosticTestServiceImpls implements IDiagnosticTestService{
+public class IDiagnosticTestServiceImpls implements IDiagnosticTestService
+{
 	
 	
 	@Autowired
