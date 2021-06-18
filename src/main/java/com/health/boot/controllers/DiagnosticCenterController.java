@@ -89,7 +89,8 @@ public class DiagnosticCenterController
 		List<DiagnosticCenter> list=new ArrayList<>();
 		List<DiagnosticCenter> list1=dcs.getAllDiagnosticCenters();
 		for(DiagnosticCenter dc:list1) {
-			if(dc.getAddress().equals(address)) {
+			if(dc.getAddress().equals(address)) 
+			{
 				list.add(dc);
 			}
 		}	
