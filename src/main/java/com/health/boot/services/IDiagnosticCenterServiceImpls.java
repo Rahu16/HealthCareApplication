@@ -24,46 +24,58 @@ import com.health.boot.repository.DiagnosticCenterRepository;
 import com.health.boot.repository.DiagnosticTestRepository;
 
 @Service
-public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
+public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService 
+{
+	
 	@Autowired
 	DiagnosticCenterRepository dcr;
+	
 	@Autowired
 	DiagnosticTestRepository dtr;
 	
 	@Autowired
 	AppointmentRepository ar;
 	
+	
 	@Override
-	public List<DiagnosticCenter> getAllDiagnosticCenters(){
+	public List<DiagnosticCenter> getAllDiagnosticCenters()
+	{
 		return dcr.findAll();
 	}
 	
 	@Override
-	public DiagnosticCenter createDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws DiagnosticCenterAlReadyExistsException{
+	public DiagnosticCenter createDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws DiagnosticCenterAlReadyExistsException
+	{
 		int id=diagnosticCenter.getId();
 		Optional<DiagnosticCenter> dc=dcr.findById(id);
-		if(dc.isEmpty()) {
+		if(dc.isEmpty()) 
+		{
 			dcr.save(diagnosticCenter);
 			return diagnosticCenter;
 		}
-		else {
+		else 
+		{
 			throw new DiagnosticCenterAlReadyExistsException("Diagnostic center with id "+id+" All ready existed");
 		}
 	}
 	
 	@Override
-	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) {
+	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) 
+	{
 		Optional<DiagnosticCenter> dc=dcr.findById(diagnosticCenterId);
-		if(dc.isEmpty()) {
+		if(dc.isEmpty()) 
+		{
 			throw new DiagnosticCenterNotFoundException("There is no Diagnostic Center with id: "+diagnosticCenterId);
 		}
 		return dc.get();
 	}
 	
 	@Override
-	public DiagnosticCenter getDiagnosticCenterByName(String centername) {
+	public DiagnosticCenter getDiagnosticCenterByName(String centername) 
+	{
 		ArrayList<DiagnosticCenter> list=(ArrayList<DiagnosticCenter>) dcr.findAll();
-		for(DiagnosticCenter dc:list) {
+		for(DiagnosticCenter dc:list) 
+		{
 			if(dc.getName().equals(centername)) 
 			return dc;
 		}
@@ -71,8 +83,10 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 	}
 	
 	@Override
-	public String removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException{
-		if(dcr.findById(id).isPresent()) {
+	public String removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException
+	{
+		if(dcr.findById(id).isPresent()) 
+		{
 			DiagnosticCenter dc=dcr.findById(id).get();
 			dcr.delete(dc);
 			return "Deleted";
@@ -82,7 +96,8 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 	}
 	
 	@Override
-	public String addTestInCenter(int testId,int centerId) {
+	public String addTestInCenter(int testId,int centerId) 
+	{
 		Optional<DiagnosticTest> dt=dtr.findById(testId);
 		Optional<DiagnosticCenter> dc=dcr.findById(centerId);
 		if(dc.isEmpty())
@@ -96,37 +111,47 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 	}
 	
 	@Override
-	public String updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
+	public String updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) 
+	{
 		int id=diagnosticCenter.getId();
 		Optional<DiagnosticCenter> dc=dcr.findById(id);
-		if(dc.isEmpty()) {
-			throw new DiagnosticCenterNotFoundException("Dignostic center is not available with provided details and not possible");}
+		if(dc.isEmpty()) 
+		{
+			throw new DiagnosticCenterNotFoundException("Dignostic center is not available with provided details and not possible");
+			}
 		dcr.save(diagnosticCenter);
 		return "Updated";
 	}
 	
 	@Override
-	public DiagnosticTest viewTestDetails(int centerId, String testName) {
+	public DiagnosticTest viewTestDetails(int centerId, String testName) 
+	{
 		Optional<DiagnosticCenter> dc=dcr.findById(centerId);
-		if(dc.isEmpty()) {
+		if(dc.isEmpty()) 
+		{
 			throw new DiagnosticCenterNotFoundException("Center not found with Id: "+centerId);
 		}
 		DiagnosticCenter dc1=dcr.findById(centerId).get();
 		Set<DiagnosticTest> set=dc1.getTests();
-		for(DiagnosticTest t:set) {
-			if(t.getTestName().equals(testName)) {
-				return t;}
+		for(DiagnosticTest t:set) 
+		{
+			if(t.getTestName().equals(testName)) 
+			{
+				return t;
+				}
 		}
 		throw new DiagnosticTestNotFoundException("Test not found with name as "+testName+" in the center.");
 	}
 	
 	@Override
-	public List<Appointment> getListOfAppointments(String centerName){
+	public List<Appointment> getListOfAppointments(String centerName)
+	{
 		List<Appointment> list=new ArrayList<>();
 		List<Appointment> list2=ar.findAll();
 		for(Appointment a:list2) {
 			String name=a.getDiagnosticCenter().getName();
-			if(name==centerName) {
+			if(name==centerName) 
+			{
 				list.add(a);
 			}
 		}	
