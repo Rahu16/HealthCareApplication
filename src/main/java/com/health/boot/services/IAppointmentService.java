@@ -7,7 +7,8 @@ import com.health.boot.entities.Appointment;
 import com.health.boot.entities.ApprovalStatus;
 import com.health.boot.exceptions.AppointmentNotFoundException;
 
-public interface IAppointmentService {
+public interface IAppointmentService 
+{
 
 	Appointment addAppointment(Appointment appointment)	throws RuntimeException;
 	Appointment removeAppointment(Appointment appointment)	throws RuntimeException;
@@ -16,5 +17,4 @@ public interface IAppointmentService {
 	Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException;
 	Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException;
 	List<Appointment> getApppointmentList(int centreId, String test, ApprovalStatus status) throws RuntimeException;
-	
 }
