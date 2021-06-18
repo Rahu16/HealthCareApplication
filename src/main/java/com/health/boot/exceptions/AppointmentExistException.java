@@ -7,5 +7,4 @@ public class AppointmentExistException extends RuntimeException
 	{
 		super(message);
 		}
-	
-}
+	}
