@@ -18,7 +18,8 @@ import javax.persistence.OneToOne;
 
 
 @Entity
-public class Appointment {
+public class Appointment 
+{
 	
 	@Id
 //	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -41,9 +42,9 @@ public class Appointment {
 	private Set<TestResult> testResult;
 	
 	
-	
 	public Appointment(int id, LocalDate appointmentDate, ApprovalStatus approvalStatus, Patient patient,
-			Set<TestResult> testResult) {
+			Set<TestResult> testResult) 
+	{
 		super();
 		this.id = id;
 		this.appointmentDate = appointmentDate;
@@ -52,96 +53,91 @@ public class Appointment {
 		this.testResult = testResult;
 	}
 	
-
-	public Appointment() {
+    public Appointment() 
+    {
 		super();
 	}
 
-
-
-	public Set<TestResult> getTestResult() {
+    public Set<TestResult> getTestResult() 
+    {
 		return testResult;
 	}
 
-
-
-	public void setTestResult(Set<TestResult> testResult) {
+    public void setTestResult(Set<TestResult> testResult) 
+    {
 		this.testResult = testResult;
 	}
 
-
-
-	public int getId() {
+     public int getId() 
+     {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(int id) 
+	{
 		this.id = id;
 	}
 
-	public LocalDate getAppointmentDate() {
+	public LocalDate getAppointmentDate() 
+	{
 		return appointmentDate;
 	}
 
-	public void setAppointmentDate(LocalDate appointmentDate) {
+	public void setAppointmentDate(LocalDate appointmentDate) 
+	{
 		this.appointmentDate = appointmentDate;
 	}
 
-	public ApprovalStatus getApprovalStatus() {
+	public ApprovalStatus getApprovalStatus() 
+	{
 		return approvalStatus;
 	}
 
-	public void setApprovalStatus(ApprovalStatus approvalStatus) {
+	public void setApprovalStatus(ApprovalStatus approvalStatus) 
+	{
 		this.approvalStatus = approvalStatus;
 	}
 
-
-	public Patient getPatient() {
+    public Patient getPatient() 
+    {
 		return patient;
 	}
 
-	public void setPatient(Patient patient) {
+	public void setPatient(Patient patient) 
+	{
 		this.patient = patient;
 	}
 
+	
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "Appointment [id=" + id + ", appointmentDate=" + appointmentDate + ", approvalStatus=" + approvalStatus
 				+ ", patient=" + patient + "]";
 	}
 
-
-	
-
-	public Set<DiagnosticTest> getDiagnosticTests() {
+    public Set<DiagnosticTest> getDiagnosticTests() 
+    {
 		return diagnosticTests;
 	}
 
-
-
-	public void setDiagnosticTests(Set<DiagnosticTest> diagnosticTests) {
+    public void setDiagnosticTests(Set<DiagnosticTest> diagnosticTests) 
+    {
 		this.diagnosticTests = diagnosticTests;
 	}
 
-
-
-	public DiagnosticCenter getDiagnosticCenter() {
+    public DiagnosticCenter getDiagnosticCenter() 
+    {
 		return diagnosticCenter;
 	}
 
-
-
-	public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) {
+    public void setDiagnosticCenter(DiagnosticCenter diagnosticCenter) 
+    {
 		this.diagnosticCenter = diagnosticCenter;
 	}
 
-
-
-	public void addDiagnosticTest(DiagnosticTest dTest) {			//this will avoid nested cascade
+    public void addDiagnosticTest(DiagnosticTest dTest) 
+    {			//this will avoid nested cascade
 		this.getDiagnosticTests().add(dTest);
 	}
-	
-
-
-
-}
+	}
