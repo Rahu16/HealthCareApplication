@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.health.boot.entities.TestResult;
 
 @Repository
-public interface ITestResultRepository extends JpaRepository<TestResult,Integer>{
-
+public interface ITestResultRepository extends JpaRepository<TestResult,Integer>
+{
 
 }
 
