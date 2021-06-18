@@ -11,7 +11,8 @@ import com.health.boot.entities.DiagnosticTest;
 import com.health.boot.exceptions.DiagnosticCenterAlReadyExistsException;
 import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
 
-public interface IDiagnosticCenterService {
+public interface IDiagnosticCenterService 
+{
 
 	public List<DiagnosticCenter> getAllDiagnosticCenters();
 	public DiagnosticCenter createDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws DiagnosticCenterAlReadyExistsException;
