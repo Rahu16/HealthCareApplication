@@ -148,7 +148,8 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 	{
 		List<Appointment> list=new ArrayList<>();
 		List<Appointment> list2=ar.findAll();
-		for(Appointment a:list2) {
+		for(Appointment a:list2) 
+		{
 			String name=a.getDiagnosticCenter().getName();
 			if(name==centerName) 
 			{
