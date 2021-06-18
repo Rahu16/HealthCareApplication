@@ -21,6 +21,7 @@ import com.health.boot.entities.Appointment;
 import com.health.boot.entities.ApprovalStatus;
 import com.health.boot.entities.DiagnosticCenter;
 import com.health.boot.entities.DiagnosticTest;
+import com.health.boot.entities.Patient;
 import com.health.boot.entities.TestResult;
 import com.health.boot.repository.AppointmentRepository;
 import com.health.boot.repository.PatientRepository;
@@ -96,7 +97,7 @@ public class AdminController {
 		return dcs.removeDiagnosticCenter(id);
 	}
 	
-	@PutMapping("/changestatus/{appointId}/{status}")
+	@PutMapping("/changeAppointmentStatus/{appointId}/{status}")
 	public ResponseEntity<String> changeStatus(@PathVariable("appointId") int appointId, @PathVariable("status") ApprovalStatus status) {
 		Appointment a = asi.viewAppointment(appointId);
 		a.setApprovalStatus(status);
@@ -128,12 +129,29 @@ public class AdminController {
 		return new ResponseEntity<List>(pr.findAll(),HttpStatus.OK);
 	}
 	
-//	@DeleteMapping("/removePatient/{patientId}")
-//	public ResponseEntity<String> removePatient(){
-//		ps
-//	
-//	}
-
+	@DeleteMapping("/removePatient/{patientId}")
+	public ResponseEntity<String> deletePatient(@PathVariable("patientId") int id){
+		psi.removePatient(id);
+		return new ResponseEntity<String>("Patient is Deleted",HttpStatus.ACCEPTED);
 	
+	}
 	
+	@DeleteMapping("/removeAppointment/{appointId}")
+	public ResponseEntity<String> deleteAppointment(@PathVariable("appointId") int id){
+		asi.removeAppointment(asi.viewAppointment(id));
+		return new ResponseEntity<String>("Appointment is Deleted",HttpStatus.ACCEPTED);
+	
+	}
+	
+	@DeleteMapping("/removeTestResult/{testId}")
+	public ResponseEntity<String> delete(@PathVariable("testId") int id){
+		trs.removeTestResult(id);
+		return new ResponseEntity<String>("Test Result is Deleted",HttpStatus.ACCEPTED);
+	
+	}
+	
+	@GetMapping("/show/{id}")
+	public ResponseEntity<Patient> seePatient(@PathVariable("id") int id){
+		return new ResponseEntity<Patient>(psi.viewPatient(id),HttpStatus.ACCEPTED);
+	}
 }
