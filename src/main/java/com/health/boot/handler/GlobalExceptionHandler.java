@@ -32,12 +32,12 @@ import com.health.boot.exceptions.UserIdPasswordInvalidException;
 
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
-	
+public class GlobalExceptionHandler 
+{
 	
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-
+			HttpHeaders headers, HttpStatus status, WebRequest request) 
+	{
 		List<String> errors = ex.getBindingResult()
 				                .getFieldErrors()
 				                .stream()
@@ -50,8 +50,8 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
-	public ResponseEntity<Object> handleEmployeeNotFoundException(UserNotFoundException ux){
-		
+	public ResponseEntity<Object> handleEmployeeNotFoundException(UserNotFoundException ux)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "Not Found");
@@ -63,8 +63,8 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(UserAlreadyExistException.class)
-	public ResponseEntity<Object> handleEmployeeNotFoundException(UserAlreadyExistException ux){
-		
+	public ResponseEntity<Object> handleEmployeeNotFoundException(UserAlreadyExistException ux)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "User Already Exist");
@@ -72,12 +72,12 @@ public class GlobalExceptionHandler {
 		errors.put("Time", LocalDateTime.now());
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
-		
+
 	}
 	
 	@ExceptionHandler(UserIdPasswordInvalidException.class)
-	public ResponseEntity<Object> handleEmployeeNotFoundException(UserIdPasswordInvalidException uv){
-		
+	public ResponseEntity<Object> handleEmployeeNotFoundException(UserIdPasswordInvalidException uv)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "Password is not matching");
@@ -85,23 +85,25 @@ public class GlobalExceptionHandler {
 		errors.put("Time", LocalDateTime.now());
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	
 	}
 	
 	@ExceptionHandler(AppointmentExistException.class)
-	public ResponseEntity<Object> handleAppointmentExistException(AppointmentExistException ae){
-		
-		Map<String,Object> errors = new LinkedHashMap<>();
+	public ResponseEntity<Object> handleAppointmentExistException(AppointmentExistException ae)
+	{
+	    Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "Appointment Already Exist");
 		errors.put("Message", ae.getMessage());
 		errors.put("Time", LocalDateTime.now());
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+	
 	}
 	
 	@ExceptionHandler(AppointmentNotFoundException.class)
-	public ResponseEntity<Object> handleAppointmentNotFoundException(AppointmentNotFoundException an){
-		
+	public ResponseEntity<Object> handleAppointmentNotFoundException(AppointmentNotFoundException an)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "Appointment is Not Found");
@@ -109,12 +111,12 @@ public class GlobalExceptionHandler {
 		errors.put("Time", LocalDateTime.now());
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.NOT_FOUND);
+	
 	}
 	
-	
 	@ExceptionHandler(PatientNotFoundException.class)
-	public ResponseEntity<Object> handlePatientNotFoundException(PatientNotFoundException pn){
-		
+	public ResponseEntity<Object> handlePatientNotFoundException(PatientNotFoundException pn)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "Patient is Not Found");
@@ -123,9 +125,10 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.NOT_FOUND);
 	}
-	 @ExceptionHandler(PatientExistException.class)
-	    public ResponseEntity<Object> handlePatientExistException(PatientExistException pe){
-	       
+
+	@ExceptionHandler(PatientExistException.class)
+	    public ResponseEntity<Object> handlePatientExistException(PatientExistException pe)
+	{
 	        Map<String,Object> errors = new LinkedHashMap<>();
 	       
 	        errors.put("Error", "Patient Already Exist");
@@ -133,11 +136,12 @@ public class GlobalExceptionHandler {
 	        errors.put("Time", LocalDateTime.now());
 	       
 	        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
-	    }
+	    
+	}
 	 
 		@ExceptionHandler(DiagnosticCenterNotFoundException.class)
-		public ResponseEntity<Object> handleDiagnosticCenterException(DiagnosticCenterNotFoundException dc){
-			
+		public ResponseEntity<Object> handleDiagnosticCenterException(DiagnosticCenterNotFoundException dc)
+		{
 			Map<String,Object> errors = new LinkedHashMap<>();
 			
 			errors.put("Error", "There is No DiagnosticCenter Found");
@@ -145,11 +149,12 @@ public class GlobalExceptionHandler {
 			errors.put("Time", LocalDateTime.now());
 			
 			return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+		
 		}
 		
 		@ExceptionHandler(DiagnosticCenterAlReadyExistsException.class)
-		public ResponseEntity<Object> handleDiagnosticCenterException(DiagnosticCenterAlReadyExistsException de){
-			
+		public ResponseEntity<Object> handleDiagnosticCenterException(DiagnosticCenterAlReadyExistsException de)
+		{
 			Map<String,Object> errors = new LinkedHashMap<>();
 			
 			errors.put("Error", "There is Already a DiagnosticCenter");
@@ -161,8 +166,8 @@ public class GlobalExceptionHandler {
 		}
 
 	@ExceptionHandler(AllreadyDiagnosticTestExistException.class)
-	public ResponseEntity<Object> handleDiagnosticTestException(AllreadyDiagnosticTestExistException ad){
-		
+	public ResponseEntity<Object> handleDiagnosticTestException(AllreadyDiagnosticTestExistException ad)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "There is allready a DiagnosticTest");
@@ -173,8 +178,8 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(DiagnosticTestNotFoundException.class)
-	public ResponseEntity<Object> handleDiagnosticTestException(DiagnosticTestNotFoundException dn){
-		
+	public ResponseEntity<Object> handleDiagnosticTestException(DiagnosticTestNotFoundException dn)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "There is No DiagnosticTest Found");
@@ -184,10 +189,9 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 	}
 	
-	
 	@ExceptionHandler(TestResultExistException.class)
-	public ResponseEntity<Object> handleTestResultException(TestResultExistException tr){
-		
+	public ResponseEntity<Object> handleTestResultException(TestResultExistException tr)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "test result exists");
@@ -197,10 +201,9 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 	}
 	
-	
 	@ExceptionHandler(TestResultNotFoundException.class)
-	public ResponseEntity<Object> handleTestResultNotFoundException(TestResultNotFoundException te){
-		
+	public ResponseEntity<Object> handleTestResultNotFoundException(TestResultNotFoundException te)
+	{
 		Map<String,Object> errors = new LinkedHashMap<>();
 		
 		errors.put("Error", "test result Not Found");
@@ -209,5 +212,4 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<Object>(errors, HttpStatus.NOT_FOUND);
 	}
-	
-}
+	}

@@ -22,7 +22,8 @@ import com.health.boot.repository.ITestResultRepository;
 import com.health.boot.repository.PatientRepository;
 
 @Service
-public class IAppointmentServiceImpl implements IAppointmentService{
+public class IAppointmentServiceImpl implements IAppointmentService
+{
 
 	@Autowired
 	AppointmentRepository ar;
@@ -38,7 +39,8 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	
 	
 	@Override
-	public Appointment addAppointment(Appointment appointment) throws RuntimeException {
+	public Appointment addAppointment(Appointment appointment) throws RuntimeException 
+	{
 		Optional<Appointment> appoint = ar.findById(appointment.getId());
 		if(appoint.isPresent())
 			throw new AppointmentExistException("Appointment with Same Id is found");
@@ -48,7 +50,8 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	}
 
 	@Override
-	public Appointment removeAppointment(Appointment appointment) throws RuntimeException {
+	public Appointment removeAppointment(Appointment appointment) throws RuntimeException 
+	{
 		Optional<Appointment> app = ar.findById(appointment.getId());
 		if(!app.isPresent())
 			throw new AppointmentNotFoundException("Appoint is not found to delete");
@@ -61,7 +64,8 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	}
 
 	@Override
-	public Set<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException {
+	public Set<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException 
+	{
 		Patient p = pr.findPatientByName(patientName);
 		if(p==null)
 			throw new PatientNotFoundException("Patient is Not Found with this Name");
@@ -69,7 +73,8 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	}
 
 	@Override
-	public Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException {
+	public Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException 
+	{
 		Optional<Appointment> a = ar.findById(appointmentId);
 		if(!a.isPresent())
 			throw new AppointmentNotFoundException("Appointment is Not Found to View");
@@ -77,7 +82,8 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 	}
 
 	@Override
-	public Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException {
+	public Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException 
+	{
 		Optional<Appointment> appoint = ar.findById(appointment.getId());
 		if(appoint.isEmpty())
 			throw new AppointmentNotFoundException("Appointment Not Found to Update");
@@ -85,23 +91,24 @@ public class IAppointmentServiceImpl implements IAppointmentService{
 		Appointment a = ar.save(appointment);
 		pr.save(p);
 		return a;
-
-	}
+}
 
 	@Override
-	public List<Appointment> getApppointmentList(int centreId, String test, ApprovalStatus status) throws RuntimeException {
+	public List<Appointment> getApppointmentList(int centreId, String test, ApprovalStatus status) throws RuntimeException 
+	{
 		List<Appointment> filteredAppointments = new ArrayList<>();
 		List<Appointment> list = ar.findAll();
 		List<Appointment> list1 = list.stream().filter(a->(a.getDiagnosticCenter().getId()==centreId && a.getApprovalStatus().equals(status)))
 				.collect(Collectors.toList());
-		for(Appointment a: list1) {
+		for(Appointment a: list1) 
+		{
 			Set<DiagnosticTest> set = a.getDiagnosticTests();
-			for(DiagnosticTest t: set) {
+			for(DiagnosticTest t: set) 
+			{
 				if(t.getTestName()==test)
 					filteredAppointments.add(a);					
 			}
 		}
 		return filteredAppointments;
+		}
 	}
-
-}

@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.health.boot.entities.Patient;
 
 @Repository
-public interface PatientRepository extends JpaRepository<Patient, Integer>{
+public interface PatientRepository extends JpaRepository<Patient, Integer>
+{
 
 	@Query("SELECT p FROM Patient p WHERE p.name = ?1")
 	Patient findPatientByName(String patientName);

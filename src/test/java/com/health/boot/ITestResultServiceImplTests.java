@@ -21,7 +21,8 @@ import com.health.boot.repository.PatientRepository;
 import com.health.boot.services.ITestResultService;
 
 @SpringBootTest
-public class ITestResultServiceImplTests {
+public class ITestResultServiceImplTests 
+{
 
 	@Autowired
 	ITestResultService testService;
@@ -31,6 +32,7 @@ public class ITestResultServiceImplTests {
 	
 	@Autowired
 	PatientRepository pr;
+	
 	
 	@Test
 	void testAddTestResult()
@@ -81,7 +83,8 @@ public class ITestResultServiceImplTests {
 	}	
 	
 	@Test
-	void testAddTestResultException() {
+	void testAddTestResultException() 
+	{
 		Appointment a = ar.findById(111).get();
 		TestResult tt1 = new TestResult();
 		tt1.setId(5);
@@ -92,7 +95,8 @@ public class ITestResultServiceImplTests {
 	}
 	
 	@Test
-	void testUpdateTestResultException() {
+	void testUpdateTestResultException() 
+	{
 		Appointment a = ar.findById(111).get();
 		TestResult tt1 = new TestResult();
 		tt1.setId(30);
@@ -103,28 +107,15 @@ public class ITestResultServiceImplTests {
 	}
 	
 	@Test
-	void testRemoveTestResultException() {
+	void testRemoveTestResultException() 
+	{
 		assertThrows(TestResultNotFoundException.class,()->testService.removeTestResult(26),"testRemoveTestResultException() should throw exception");
 	}
 	
 	@Test
-	void testViewTestResultByPatientException() {
+	void testViewTestResultByPatientException() 
+	{
 		Patient p = pr.findById(200).get();
 		assertThrows(PatientNotFoundException.class,()->testService.viewResultsByPatient(p),"testViewTestResultByPatientException() should throw exception");
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

@@ -19,36 +19,42 @@ import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;
 import com.health.boot.services.IUserService;
 
+
 @RestController
 @RequestMapping("user")
-public class UserController {
+public class UserController 
+{
+	
 	
 	@Autowired
 	IUserService uService;
 	
+	
 	@PostMapping("/login")
 	public ResponseEntity<String> signIn(@RequestBody ObjHolder obj)
-	{	
+	{
 		String username = obj.getUsername();
 		String password = obj.getPassword();
 		User u = uService.validateUser(username, password);
 		return new ResponseEntity<String>("Logged In",HttpStatus.ACCEPTED);
-	}
+}
+	
 	
 	@PostMapping("/signUp")
-	public ResponseEntity<String> signUp(@RequestBody User user){
+	public ResponseEntity<String> signUp(@RequestBody User user)
+	{
 		User u = uService.addUser(user);
 		return new ResponseEntity<String>("Sign Up Sucessfull",HttpStatus.ACCEPTED);
-
-	}
+		}
+	
 	
 	@DeleteMapping("/deleteUser")
-	public ResponseEntity<String> deleteUser(@RequestBody ObjHolder obj){
-		uService.removeUser(obj);
+	public ResponseEntity<String> deleteUser(@RequestBody ObjHolder obj)
+	{
+		String username = obj.getUsername();
+		String password = obj.getPassword();
+		User u = uService.validateUser(username, password);
+		User us = uService.removeUser(u);
 		return new ResponseEntity<String>("User is Deleted",HttpStatus.ACCEPTED);
-
+		}
 	}
-	
-	
-
-}

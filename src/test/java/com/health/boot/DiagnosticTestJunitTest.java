@@ -15,7 +15,8 @@ import com.health.boot.exceptions.DiagnosticTestNotFoundException;
 import com.health.boot.repository.DiagnosticTestRepository;
 import com.health.boot.services.IDiagnosticTestService;
 @SpringBootTest
-class DiagnosticTestJunitTest {
+class DiagnosticTestJunitTest 
+{
 
 	@Autowired
 	IDiagnosticTestService dts;
@@ -23,9 +24,11 @@ class DiagnosticTestJunitTest {
 	@Autowired
 	DiagnosticTestRepository dtr;
 	
+	
 	// Test For  getAllTest Method
 	@Test
-	void test() {
+	void test() 
+	{
 		int l1=dts.getAllTest().size();
 		int l2=dtr.findAll().size();
 		assertEquals(l1,l2);
@@ -60,7 +63,8 @@ class DiagnosticTestJunitTest {
 	
 	// Test For updateTestDetail Method
 	@Test
-	void testUpdateTestDetail() {
+	void testUpdateTestDetail() 
+	{
 		DiagnosticTest dt= new DiagnosticTest();
 		dt.setId(121);
 		dt.setNormalValue("med");
@@ -68,13 +72,13 @@ class DiagnosticTestJunitTest {
 		dt.setUnits("M");
 		dt.setTestPrice(5500);
 		DiagnosticTest dt1=dts.updateTestDetail(dt);
-		assertEquals(dt1.toString(),dt.toString());
-		
+		assertEquals(dt1.toString(),dt.toString());		
 	}
 	
 	// Test For DiagnosticTestNotFoundException in updateTestDetail Method
 	@Test
-	void exceptionTestUpdateTestDetail() {
+	void exceptionTestUpdateTestDetail() 
+	{
 		DiagnosticTest dt= new DiagnosticTest();
 		dt.setId(141);
 		dt.setNormalValue("med");
@@ -86,7 +90,8 @@ class DiagnosticTestJunitTest {
 	
 	// Test For testById Method
 	@Test
-	void testTestById() {
+	void testTestById() 
+	{
 		int testId=121;
 		DiagnosticTest dt=dts.testById(testId);
 		assertEquals(dt.getId(),testId);
@@ -94,7 +99,8 @@ class DiagnosticTestJunitTest {
 	
 	// Test For DiagnosticTestNotFoundException in testById Method
 	@Test
-	void exceptionTestById() {
+	void exceptionTestById() 
+	{
 		int testId=100;
 		assertThrows(DiagnosticTestNotFoundException.class,()->dts.testById(testId));
 	}
@@ -110,7 +116,8 @@ class DiagnosticTestJunitTest {
 	
 	// Test For DiagnosticCenterNotFoundException in removeTestFromDiagnosticCenter Method
 	@Test
-	void exceptionRemoveTestFromDiagnosticCenter() {
+	void exceptionRemoveTestFromDiagnosticCenter() 
+	{
 		int centerId=1000;
 		int testId=143;
 		assertThrows(DiagnosticCenterNotFoundException.class,()->dts.removeTestFromDiagnosticCenter(centerId, testId));
@@ -118,7 +125,8 @@ class DiagnosticTestJunitTest {
 	
 	// Test For DiagnosticTestNotFoundException1 in  removeTestFromDiagnosticCenter Method
 	@Test 
-	void exception1RemoveTestFromDiagnosticCenter() {
+	void exception1RemoveTestFromDiagnosticCenter() 
+	{
 		int centerId=1221;
 		int testId=100;
 		assertThrows(DiagnosticTestNotFoundException.class,()->dts.removeTestFromDiagnosticCenter(centerId, testId));
@@ -126,7 +134,8 @@ class DiagnosticTestJunitTest {
 	
 	// Test For DiagnosticTestNotFoundException2 in  removeTestFromDiagnosticCenter Method
 	@Test 
-	void exception2RemoveTestFromDiagnosticCenter() {
+	void exception2RemoveTestFromDiagnosticCenter() 
+	{
 		int centerId=1221;
 		int testId=108;
 		assertThrows(DiagnosticTestNotFoundException.class,()->dts.removeTestFromDiagnosticCenter(centerId, testId));
@@ -134,7 +143,8 @@ class DiagnosticTestJunitTest {
 	
 	// Test For getTestsOfDiagnosticCenter Method
 	@Test
-	void testGetTestsOfDiagnosticCenter() {
+	void testGetTestsOfDiagnosticCenter() 
+	{
 		int centerId=1221;
 		int l1=2;
 		int l2=dts.getTestsOfDiagnosticCenter(centerId).size();
@@ -143,10 +153,9 @@ class DiagnosticTestJunitTest {
 	
 	// Test For DiagnosticCenterNotFoundException in getTestsOfDiagnosticCenter Method
 	@Test
-	void exceptionTestGetTestsOfDiagnosticCenter() {
-		
+	void exceptionTestGetTestsOfDiagnosticCenter() 
+	{		
 		int centerId=1222;
 		assertThrows(DiagnosticCenterNotFoundException.class, ()->dts.getTestsOfDiagnosticCenter(centerId));
 	}
-
 }
