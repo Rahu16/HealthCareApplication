@@ -69,7 +69,7 @@ public class ITestResultServiceImpl implements ITestResultService {
 	@Override
 	public Set<TestResult> viewResultsByPatient(Patient patient) {
 		Set<TestResult> testResultSet = new HashSet<>();
-		if(pr.findById(patient.getPatientId()).isPresent())
+		if(pr.findById(patient.getPatientId()).isEmpty())
 			throw new PatientNotFoundException("Patient is Not Found to View All Test Result");
 		for(Appointment a : patient.getAppointments()) {
 			testResultSet.addAll(a.getTestResult());

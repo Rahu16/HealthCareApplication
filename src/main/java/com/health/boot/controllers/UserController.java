@@ -27,13 +27,12 @@ public class UserController {
 	IUserService uService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> signIn(@RequestBody ObjHolder obj){
-		
+	public ResponseEntity<String> signIn(@RequestBody ObjHolder obj)
+	{	
 		String username = obj.getUsername();
 		String password = obj.getPassword();
 		User u = uService.validateUser(username, password);
 		return new ResponseEntity<String>("Logged In",HttpStatus.ACCEPTED);
-
 	}
 	
 	@PostMapping("/signUp")
@@ -45,10 +44,7 @@ public class UserController {
 	
 	@DeleteMapping("/deleteUser")
 	public ResponseEntity<String> deleteUser(@RequestBody ObjHolder obj){
-		String username = obj.getUsername();
-		String password = obj.getPassword();
-		User u = uService.validateUser(username, password);
-		User us = uService.removeUser(u);
+		uService.removeUser(obj);
 		return new ResponseEntity<String>("User is Deleted",HttpStatus.ACCEPTED);
 
 	}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import com.health.boot.controllers.ObjHolder;
 import com.health.boot.entities.User;
 import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;
@@ -47,12 +48,14 @@ public class IUserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User removeUser(User user) {
-		Optional<User> u = ur.findById(user.getUsername());
+	public User removeUser(ObjHolder obj) {
+		Optional<User> u = ur.findById(obj.getUsername());
 		if(!u.isPresent())
 			throw new UserNotFoundException("User is Not Found to Delete");
-		ur.delete(user);
-		return user;
+		if(!u.get().getPassword().equals(obj.getPassword()))
+			throw new UserIdPasswordInvalidException("Password is Incorrect to delete the User");
+		ur.delete(u.get());
+		return u.get();
 	}
 
 }

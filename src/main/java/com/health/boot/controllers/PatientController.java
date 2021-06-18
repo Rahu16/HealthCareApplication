@@ -121,8 +121,6 @@ public class PatientController {
 		Appointment a = as.viewAppointment(appointId);
 		if(a.getPatient().getPatientId()==patientId)
 			return new ResponseEntity<Set>(a.getTestResult(),HttpStatus.FOUND);
-		throw new AppointmentNotFoundException("Appointment Not Found For the Particular Patient");
-
-		
+		throw new AppointmentNotFoundException("Appointment Not Found For the Particular Patient");		
 	}
 }

@@ -33,7 +33,7 @@ public class Appointment {
 	@JoinColumn(name="patientid",referencedColumnName = "patientId")
 	private Patient patient;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinColumn(name="diago_center")
 	private DiagnosticCenter diagnosticCenter;
 	
