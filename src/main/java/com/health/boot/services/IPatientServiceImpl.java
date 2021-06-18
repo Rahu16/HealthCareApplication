@@ -13,57 +13,64 @@ import com.health.boot.exceptions.PatientNotFoundException;
 import com.health.boot.repository.PatientRepository;
 
 @Service
-public class  IPatientServiceImpl implements IPatientService{
+public class  IPatientServiceImpl implements IPatientService
+{
 	
 	@Autowired
 	PatientRepository pr;
 
+	
 	@Override
-	public Patient registerPatient(Patient patient) throws RuntimeException {
+	public Patient registerPatient(Patient patient) throws RuntimeException 
+	{
 		if(pr.findById(patient.getPatientId()).isPresent())
 			throw new PatientExistException("Patient is already exist with the same Id");
 		return pr.save(patient);
 	}
 
 	@Override
-	public Patient updatePatientDetails(Patient patient) {
+	public Patient updatePatientDetails(Patient patient) 
+	{
 		if(!pr.findById(patient.getPatientId()).isPresent())
 			throw new PatientNotFoundException("Patient is Not Found to Update");
 		return pr.save(patient);
 	}
 
 	@Override
-	public Patient viewPatient(String patientUserName) {
-		
+	public Patient viewPatient(String patientUserName) 
+	{
 		Patient p = pr.findPatientByName(patientUserName);
 		if(p==null)
 			throw new PatientNotFoundException("Patient is Not Found TO View it.");
 		return p;
 	}
 	
-	public Patient viewPatient(int patientId) {		
+	public Patient viewPatient(int patientId) 
+	{		
 		Optional<Patient> p = pr.findById(patientId);
 		if(p.isEmpty())
 			throw new PatientNotFoundException("Patient is Not Found TO View it.");
 		return p.get();
 	}
 	
-	public Patient removePatient(int pid) {
+	public Patient removePatient(int pid) 
+	{
 		Patient p = viewPatient(pid);
 		pr.deleteById(pid);
 		return p;
 	}
 
 	@Override
-	public List<TestResult> getAllTestResult(String patientUserName) throws RuntimeException {
+	public List<TestResult> getAllTestResult(String patientUserName) throws RuntimeException 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public TestResult viewTestResult(int testResultId) throws RuntimeException {
+	public TestResult viewTestResult(int testResultId) throws RuntimeException 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
