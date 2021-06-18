@@ -33,7 +33,8 @@ import com.health.boot.services.ITestResultServiceImpl;
 
 @RestController
 @RequestMapping("/Admin")
-public class AdminController {
+public class AdminController
+{
 	
 	@Autowired
 	IPatientServiceImpl psi;
@@ -79,13 +80,15 @@ public class AdminController {
 	
 	
 	@PutMapping("/updateCenterDetails")
-	public ResponseEntity<String> updateCenterDetails(@RequestBody DiagnosticCenter dc) {
+	public ResponseEntity<String> updateCenterDetails(@RequestBody DiagnosticCenter dc)
+	{
 		return new ResponseEntity<String>(dcs.updateDiagnosticCenter(dc),HttpStatus.ACCEPTED);
 	}
 	
 	
 	@PutMapping("/addTestInCenter/{tid}/{cid}")
-	public ResponseEntity<String> addTestInCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid) {
+	public ResponseEntity<String> addTestInCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid)
+	{
 		return new ResponseEntity<String>(dcs.addTestInCenter(tid, cid),HttpStatus.ACCEPTED);
 	}
 	
