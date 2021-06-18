@@ -65,7 +65,7 @@ public class PatientController {
 		System.out.println("Hello Everyone");
 		Set<DiagnosticTest> set = new HashSet<>();
 		Patient p = ps.viewPatient(requestAppoint.getPatientName());
-		DiagnosticCenter dc = dcs.getDiagnosticCenterById(requestAppoint.getDiagCenterId()).get();
+		DiagnosticCenter dc = dcs.getDiagnosticCenterById(requestAppoint.getDiagCenterId());
 		DiagnosticTest dt = dcs.viewTestDetails(requestAppoint.getDiagCenterId(), requestAppoint.getTestName());
 		Appointment a = new Appointment();
 		a.setId(requestAppoint.getAppointId());

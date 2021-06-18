@@ -1,6 +1,8 @@
 package com.health.boot.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,43 +27,39 @@ public class AdminController {
 	IDiagnosticTestService dts;
 	
 	@PostMapping("/newDiagnosticCenter")
-	public DiagnosticCenter createNewDiagnosticCenter(@RequestBody DiagnosticCenter dc) {
-		dcs.createDiagnosticCenter(dc);
-		return dc;
+	public ResponseEntity<DiagnosticCenter> createNewDiagnosticCenter(@RequestBody DiagnosticCenter dc) {
+		
+		return new ResponseEntity<DiagnosticCenter>(dcs.createDiagnosticCenter(dc),HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/createNewTest")
-	public DiagnosticTest createNewTest(@RequestBody DiagnosticTest t) {
-		return dts.CreateNewTest(t);
+	public ResponseEntity<DiagnosticTest> createNewTest(@RequestBody DiagnosticTest t) {
+		return new ResponseEntity<DiagnosticTest>(dts.CreateNewTest(t),HttpStatus.CREATED);
 	}
 		
 	@PutMapping("/updateTestDetails")
-	public DiagnosticTest updateTestDetails(@RequestBody DiagnosticTest test) {
-		return dts.updateTestDetail(test);
+	public ResponseEntity<DiagnosticTest> updateTestDetails(@RequestBody DiagnosticTest test) {
+		return new ResponseEntity<DiagnosticTest>(dts.updateTestDetail(test),HttpStatus.ACCEPTED);
 	}
 	
 	@PutMapping("/updateCenterDetails")
-	public String updateCenterDetails(@RequestBody DiagnosticCenter dc) {
-		return dcs.updateDiagnosticCenter(dc);
+	public ResponseEntity<String> updateCenterDetails(@RequestBody DiagnosticCenter dc) {
+		return new ResponseEntity<String>(dcs.updateDiagnosticCenter(dc),HttpStatus.ACCEPTED);
 	}
 	
 	@PutMapping("/addTestInCenter/{tid}/{cid}")
-	public String addTestInCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid) {
-		DiagnosticCenter dm=dcs.addTestInCenter(tid, cid);
-		if(dm==null) {
-			return "not added";
-		}
-		return"added";
+	public ResponseEntity<String> addTestInCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid) {
+		return new ResponseEntity<String>(dcs.addTestInCenter(tid, cid),HttpStatus.ACCEPTED);
 	}
 	
 	@PutMapping("/delTestFromCenter/{cid}/{tid}")
-	public DiagnosticTest delTestFromCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid) {
-		return dts.removeTestFromDiagnosticCenter(cid, tid);
+	public ResponseEntity<DiagnosticTest> delTestFromCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid) {
+		return new ResponseEntity<DiagnosticTest>(dts.removeTestFromDiagnosticCenter(cid, tid),HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/deleteDiagnosticCenter/{id}")
-	public String deleteDiagnosticCenter(@PathVariable("id") int id) {
-		return dcs.removeDiagnosticCenter(id);
+	public ResponseEntity<String> deleteDiagnosticCenter(@PathVariable("id") int id) {
+		return new ResponseEntity<String>(dcs.removeDiagnosticCenter(id),HttpStatus.ACCEPTED);
 	}
 
 	

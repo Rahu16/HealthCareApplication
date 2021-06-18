@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,16 +25,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="diagnostic_center")
 public class DiagnosticCenter {
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="dcenter_id")
 	private int id;
 	@Column(name="centername")
+	@NotEmpty(message = "Email must not be empty")
 	private String name;
 	@Column(name="contactno")
+	@NotEmpty(message = "ContactNo must not be empty")
 	private String contactNo;
 	@Column(name="address")
+	@NotEmpty(message = "Address must not be empty")
 	private String address;
 	@Column(name="email")
+	@NotEmpty(message = "Email must not be empty")
+	@Email(message = "Email must be a valid email address")
 	private String contactEmail;
     @ManyToMany()
 	@JoinTable(name="dcenter_dtest",

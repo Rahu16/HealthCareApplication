@@ -16,8 +16,8 @@ public interface IDiagnosticCenterService {
 	public List<DiagnosticCenter> getAllDiagnosticCenters();
 	public DiagnosticCenter createDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws DiagnosticCenterAlReadyExistsException;
 	public String updateDiagnosticCenter(DiagnosticCenter diagnosticCenter);
-	public Optional<DiagnosticCenter> getDiagnosticCenterById(int diagnosticCenterId);
-	public DiagnosticCenter addTestInCenter(int testId,int centerId);
+	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId);
+	public String addTestInCenter(int testId,int centerId);
 	DiagnosticCenter getDiagnosticCenterByName(String centername);
 	String removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException;
 	DiagnosticTest viewTestDetails(int centerId, String testname);

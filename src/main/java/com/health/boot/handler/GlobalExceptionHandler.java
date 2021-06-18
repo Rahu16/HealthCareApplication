@@ -2,12 +2,17 @@ package com.health.boot.handler;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 
 import com.health.boot.exceptions.AllreadyDiagnosticTestExistException;
 import com.health.boot.exceptions.AppointmentExistException;
@@ -28,6 +33,21 @@ import com.health.boot.exceptions.UserIdPasswordInvalidException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+	
+	
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		List<String> errors = ex.getBindingResult()
+				                .getFieldErrors()
+				                .stream()
+				                .map(x -> x.getDefaultMessage())
+				                .collect(Collectors.toList());
+	
+		Map<String,Object> errorMap=new LinkedHashMap<>();
+		errorMap.put("ValidationErrors", errors);
+		return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
+	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	public ResponseEntity<Object> handleEmployeeNotFoundException(UserNotFoundException ux){

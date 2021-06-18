@@ -52,12 +52,12 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 	}
 	
 	@Override
-	public Optional<DiagnosticCenter> getDiagnosticCenterById(int diagnosticCenterId) {
+	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) {
 		Optional<DiagnosticCenter> dc=dcr.findById(diagnosticCenterId);
 		if(dc.isEmpty()) {
 			throw new DiagnosticCenterNotFoundException("There is no Diagnostic Center with id: "+diagnosticCenterId);
 		}
-		return dc;
+		return dc.get();
 	}
 	
 	@Override
@@ -82,7 +82,7 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 	}
 	
 	@Override
-	public DiagnosticCenter addTestInCenter(int testId,int centerId) {
+	public String addTestInCenter(int testId,int centerId) {
 		Optional<DiagnosticTest> dt=dtr.findById(testId);
 		Optional<DiagnosticCenter> dc=dcr.findById(centerId);
 		if(dc.isEmpty())
@@ -92,7 +92,7 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService {
 		
 		dc.get().addtest(dt.get());
 		dcr.save(dc.get());
-		return dc.get();
+		return "Added";
 	}
 	
 	@Override
