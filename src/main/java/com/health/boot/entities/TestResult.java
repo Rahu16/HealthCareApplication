@@ -15,7 +15,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Test_Result")
-public class TestResult implements Serializable{
+public class TestResult implements Serializable
+{
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,11 +30,13 @@ public class TestResult implements Serializable{
 	@JoinColumn(name="appointment_no")
 	private Appointment appointment;
 
-	public TestResult() {
+	public TestResult() 
+	{
 		super();
 	}
 
-	public TestResult(int id, double testReading, String condition, Appointment appointment) {
+	public TestResult(int id, double testReading, String condition, Appointment appointment) 
+	{
 		super();
 		this.id = id;
 		this.testReading = testReading;
@@ -41,49 +44,51 @@ public class TestResult implements Serializable{
 		this.appointment = appointment;
 	}
 
-
-	public int getId() {
+	public int getId() 
+	{
 		return id;
 	}
 
-
-	public void setId(int id) {
+	public void setId(int id) 
+	{
 		this.id = id;
 	}
 
 
-	public double getTestReading() {
+	public double getTestReading() 
+	{
 		return testReading;
 	}
 
-
-	public void setTestReading(double testReading) {
+	public void setTestReading(double testReading) 
+	{
 		this.testReading = testReading;
 	}
 
-
-	public String getCondition() {
+	public String getCondition() 
+	{
 		return condition;
 	}
 
-
-	public void setCondition(String condition) {
+	public void setCondition(String condition) 
+	{
 		this.condition = condition;
 	}
 
-
-	public Appointment getAppointment() {
+	public Appointment getAppointment() 
+	{
 		return appointment;
 	}
 
-
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(Appointment appointment) 
+	{
 		this.appointment = appointment;
 	}
 
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "TestResult [id=" + id + ", testReading=" + testReading + ", condition=" + condition + "]";
 	}	
 }
