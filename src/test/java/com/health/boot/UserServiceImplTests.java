@@ -22,10 +22,10 @@ public class UserServiceImplTests {
 	void testValidateUser() {
 
 		User u1 = new User();
-		u1.setId(1000);
-		u1.setUsername("HMONDAL");
-		u1.setPassword("lotOfEffort");
-		u1.setRole("Admin");
+		u1.setId(1);
+		u1.setUsername("satish");
+		u1.setPassword("satish143");
+		u1.setRole("patient");
 		User u = usi.validateUser(u1.getUsername(),u1.getPassword());
 		assertEquals(u.toString(),u1.toString());
 	}
@@ -34,10 +34,10 @@ public class UserServiceImplTests {
 	void testAddUser() {
 
 		User u1 = new User();
-		u1.setId(2000);
-		u1.setUsername("hasibul");
-		u1.setPassword("vaccine");
-		u1.setRole("Customer");
+		u1.setId(7);
+		u1.setUsername("bharath");
+		u1.setPassword("mahesh");
+		u1.setRole("Admin");
 		User u = usi.addUser(u1);
 		assertTrue(u.toString().equals(u1.toString()));
 	}
@@ -46,9 +46,9 @@ public class UserServiceImplTests {
 	void testAddUserAlreadyExistException() {
 		User u1 = new User();
 		u1.setId(2000);
-		u1.setUsername("hasibul");
-		u1.setPassword("vacci");
-		u1.setRole("Customer");
+		u1.setUsername("satish");
+		u1.setPassword("satish143");
+		u1.setRole("patient");
 		assertThrows(UserAlreadyExistException.class,()->usi.addUser(u1),"testAddUserAlreadyExistException() should throw exception");
 	}
 
@@ -56,20 +56,20 @@ public class UserServiceImplTests {
 	@Test
 	void testValidateUserIdPasswordException() {
 		User u1 = new User();
-		u1.setId(2000);
-		u1.setUsername("hasibul");
+		u1.setId(205);
+		u1.setUsername("mahesh");
 		u1.setPassword("vacci");
-		u1.setRole("Customer");
+		u1.setRole("Admin");
 		assertThrows(UserIdPasswordInvalidException.class,()->usi.validateUser(u1.getUsername(), u1.getPassword()),"testValidateUserIdPasswordException() should throw exception");
 	}
 	
 	@Test
 	void testRemoveUser() {
 		User u1 = new User();
-		u1.setId(2000);
-		u1.setUsername("hasibul");
-		u1.setPassword("vaccine");
-		u1.setRole("Customer");
+		u1.setId(205);
+		u1.setUsername("mahesh");
+		u1.setPassword("mahesh");
+		u1.setRole("Admin");
 		User u = usi.removeUser(u1);
 		assertTrue(u.toString().equals(u1.toString()));
 	}

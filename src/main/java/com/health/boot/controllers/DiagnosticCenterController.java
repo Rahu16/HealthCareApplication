@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,22 +41,22 @@ public class DiagnosticCenterController {
 		
 		return dcs.getAllDiagnosticCenters();}
 	
-	@GetMapping("{id}")
-	public ResponseEntity<DiagnosticCenter> searchCenter(@PathVariable("id") int id) {
+	@GetMapping("searchCenterById/{id}")
+	public ResponseEntity<DiagnosticCenter> searchCenter(@Valid @PathVariable("id") int id) {
 		return new ResponseEntity<DiagnosticCenter>(dcs.getDiagnosticCenterById(id),HttpStatus.ACCEPTED);}
 	
 	@GetMapping("searchCenterByName/{centername}")
-	public ResponseEntity<DiagnosticCenter> searchCenterByName(@PathVariable("centername") String name) {
+	public ResponseEntity<DiagnosticCenter> searchCenterByName(@Valid @PathVariable("centername") String name) {
 		return new ResponseEntity<DiagnosticCenter>(dcs.getDiagnosticCenterByName(name),HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("{cid}/{testname}")
-	public ResponseEntity<DiagnosticTest> viewDetails(@PathVariable("cid") int centerId,@PathVariable("testname") String testname) {
+	public ResponseEntity<DiagnosticTest> viewDetails(@Valid @PathVariable("cid") int centerId,@Valid @PathVariable("testname") String testname) {
 		return new ResponseEntity<DiagnosticTest>(dcs.viewTestDetails(centerId, testname),HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("sortCentersByTestName/{testName}")
-	public ResponseEntity<List> sortCentersByTestName(@PathVariable("testName") String testName){
+	public ResponseEntity<List> sortCentersByTestName(@Valid @PathVariable("testName") String testName){
 		
 		List<DiagnosticCenter> list=new ArrayList<>();
 		List<DiagnosticCenter> list1=dcs.getAllDiagnosticCenters();
@@ -69,7 +71,7 @@ public class DiagnosticCenterController {
 	}
 	
 	@GetMapping("sortCentersByAddress/{address}")
-	public ResponseEntity<List> sortCentersByAddress(@PathVariable("address") String address){
+	public ResponseEntity<List> sortCentersByAddress(@Valid @PathVariable("address") String address){
 		
 		List<DiagnosticCenter> list=new ArrayList<>();
 		List<DiagnosticCenter> list1=dcs.getAllDiagnosticCenters();

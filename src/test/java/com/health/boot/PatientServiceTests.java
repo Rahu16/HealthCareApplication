@@ -24,7 +24,7 @@ public class PatientServiceTests {
 	
 	@Test
 	void testRegisterPatient() {
-		Patient p  =new Patient(999,"Azhar","8133071345",30,"Male");
+		Patient p  =new Patient(98,"Rakesh","81555551345",30,"Male");
 		Patient p1 = ps.registerPatient(p);
 		assertTrue(p.getPatientId()==p1.getPatientId());
 	}
@@ -37,7 +37,7 @@ public class PatientServiceTests {
 	
 	@Test
 	void testUpdatePatient() {
-		Patient p  =new Patient(444,"Sonia","7003071345",25,"Female");
+		Patient p  =new Patient(999,"Azhar","7003071345",25,"Female");
 		Patient p1 = ps.updatePatientDetails(p);
 		assertTrue(p.getName().equals(p1.getName()));
 	}

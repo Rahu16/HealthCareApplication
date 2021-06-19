@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,14 +56,14 @@ public class PatientController {
 	
 
 	@PostMapping("/registerPatient")
-	public ResponseEntity<String> registerPatient(@RequestBody Patient p) {
+	public ResponseEntity<String> registerPatient(@Valid @RequestBody Patient p) {
 		ps.registerPatient(p);
 		return new ResponseEntity<String>("Resgistered Sucessfully",HttpStatus.ACCEPTED);
 	}
 	
 
 	@PostMapping("/requestAppointment")
-	public ResponseEntity<Appointment> requestAppoinment(@RequestBody ObjHolderRequestAppointment requestAppoint) {
+	public ResponseEntity<Appointment> requestAppoinment(@Valid @RequestBody ObjHolderRequestAppointment requestAppoint) {
 		System.out.println("Hello Everyone");
 		Set<DiagnosticTest> set = new HashSet<>();
 		Patient p = ps.viewPatient(requestAppoint.getPatientName());
