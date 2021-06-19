@@ -151,7 +151,7 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 		for(Appointment a:list2) 
 		{
 			String name=a.getDiagnosticCenter().getName();
-			if(name==centerName) 
+			if(name.equals(centerName)) 
 			{
 				list.add(a);
 			}
