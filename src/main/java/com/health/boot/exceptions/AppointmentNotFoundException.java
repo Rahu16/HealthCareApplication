@@ -1,11 +1,10 @@
 package com.health.boot.exceptions;
 
-public class AppointmentNotFoundException extends RuntimeException{
+public class AppointmentNotFoundException extends RuntimeException
+{
 
-	public AppointmentNotFoundException(String message) {
+	public AppointmentNotFoundException(String message) 
+	{
 		super(message);	
 	}
-	
-	
-
-}
+	}

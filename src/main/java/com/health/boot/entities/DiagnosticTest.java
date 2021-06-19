@@ -24,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="diagnostic_test")
-public class DiagnosticTest {
+public class DiagnosticTest 
+{
 
 		@Id
 		@Column(name="dtest_id")
@@ -46,7 +47,8 @@ public class DiagnosticTest {
  		@ManyToMany(mappedBy="tests",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
  		private Set<DiagnosticCenter> diagnosticCenters = new HashSet<>();
 		
- 		public DiagnosticTest(int id, String testName, double testPrice, String normalValue, String units) {
+ 		public DiagnosticTest(int id, String testName, double testPrice, String normalValue, String units) 
+ 		{
 			super();
 			this.id = id;
 			this.testName = testName;
@@ -56,7 +58,8 @@ public class DiagnosticTest {
 		}
 
 		public DiagnosticTest(int id, String testName, double testPrice, String normalValue, String units,
-				Set<DiagnosticCenter> diagnosticCenters) {
+				Set<DiagnosticCenter> diagnosticCenters) 
+		{
 			super();
 			this.id = id;
 			this.testName = testName;
@@ -66,40 +69,48 @@ public class DiagnosticTest {
 			this.diagnosticCenters = diagnosticCenters;
 		}
 
-		public DiagnosticTest() {
+		public DiagnosticTest() 
+		{
 			super();
-			
 		}
 
-		public int getId() {
+		public int getId() 
+		{
 			return id;
 		}
 
-		public void setId(int id) {
+		public void setId(int id) 
+		{
 			this.id = id;
 		}
 
-		public String getTestName() {
+		public String getTestName() 
+		{
 			return testName;
 		}
 
-		public void setTestName(String testName) {
+		public void setTestName(String testName) 
+		{
 			this.testName = testName;
 		}
 
-		public double getTestPrice() {
+		public double getTestPrice() 
+		{
 			return testPrice;
 		}
 
-		public void setTestPrice(double testPrice) {
+		public void setTestPrice(double testPrice) 
+		{
 			this.testPrice = testPrice;
 		}
 
-		public String getNormalValue() {
+		public String getNormalValue() 
+		{
 			return normalValue;
 		}
 
-		public void setNormalValue(String normalValue) {
+		public void setNormalValue(String normalValue) 
+		{
 			this.normalValue = normalValue;
 		}
 
@@ -107,25 +118,26 @@ public class DiagnosticTest {
 			return units;
 		}
 
-		public void setUnits(String units) {
+		public void setUnits(String units) 
+		{
 			this.units = units;
 		}
 //
- 		public Set<DiagnosticCenter> getDiagnosticCenters() {
+ 		public Set<DiagnosticCenter> getDiagnosticCenters() 
+ 		{
  			return diagnosticCenters;
  		}
  
- 		public void setDiagnosticCenters(Set<DiagnosticCenter> diagnosticCenters) {
+ 		public void setDiagnosticCenters(Set<DiagnosticCenter> diagnosticCenters) 
+ 		{
  			this.diagnosticCenters = diagnosticCenters;
 				}
+ 		
 
 		@Override
-		public String toString() {
+		public String toString() 
+		{
 			return "DiagnosticTest [id=" + id + ", testName=" + testName + ", testPrice=" + testPrice + ", normalValue="
 					+ normalValue + ", units=" + units + ", diagnosticCenters=" + diagnosticCenters + "]";
 		}
-
- 		
-		
-
 }

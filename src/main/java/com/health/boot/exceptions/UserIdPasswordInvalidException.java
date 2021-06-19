@@ -1,11 +1,10 @@
 package com.health.boot.exceptions;
 
-public class UserIdPasswordInvalidException extends RuntimeException{
+public class UserIdPasswordInvalidException extends RuntimeException
+{
 
-	public UserIdPasswordInvalidException(String message) {
+	public UserIdPasswordInvalidException(String message) 
+	{
 		super(message);
 	}
-	
-	
-
-}
+	}

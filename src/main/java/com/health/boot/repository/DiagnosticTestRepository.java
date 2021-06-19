@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.health.boot.entities.DiagnosticTest;
 
 @Repository
-public interface DiagnosticTestRepository extends JpaRepository<DiagnosticTest, Integer>{
+public interface DiagnosticTestRepository extends JpaRepository<DiagnosticTest, Integer>
+{
 	
-
 }

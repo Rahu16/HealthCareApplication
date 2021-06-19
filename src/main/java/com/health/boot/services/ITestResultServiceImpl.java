@@ -20,7 +20,8 @@ import com.health.boot.repository.PatientRepository;
 
 
 @Service
-public class ITestResultServiceImpl implements ITestResultService {
+public class ITestResultServiceImpl implements ITestResultService 
+{
 
 	@Autowired
 	ITestResultRepository testresultRepo;
@@ -32,9 +33,9 @@ public class ITestResultServiceImpl implements ITestResultService {
 	PatientRepository pr;
 	
 	
-	
 	@Override
-	public TestResult addTestResult(TestResult tr) {	
+	public TestResult addTestResult(TestResult tr) 
+	{	
 		Optional<TestResult> testR = testresultRepo.findById(tr.getId());
 		if(testR.isPresent())
 			throw new TestResultExistException("Test Result is Already Exist");
@@ -44,7 +45,8 @@ public class ITestResultServiceImpl implements ITestResultService {
 	}
 
 	@Override
-	public TestResult updateTestResult(TestResult tr) {
+	public TestResult updateTestResult(TestResult tr) 
+	{
 		Optional<TestResult> trOptional =  testresultRepo.findById(tr.getId());
 		if(!trOptional.isPresent())
 			throw new TestResultNotFoundException("Test Result is Not Found to Update");
@@ -55,7 +57,8 @@ public class ITestResultServiceImpl implements ITestResultService {
 	}
 
 	@Override
-	public TestResult removeTestResult(int id) {
+	public TestResult removeTestResult(int id) 
+	{
 		Optional<TestResult> trOptional =  testresultRepo.findById(id);
 		if(trOptional.isPresent())
 			throw new TestResultNotFoundException("Test Result is Not Found to Delete");
@@ -67,19 +70,22 @@ public class ITestResultServiceImpl implements ITestResultService {
 	}
 
 	@Override
-	public Set<TestResult> viewResultsByPatient(Patient patient) {
+	public Set<TestResult> viewResultsByPatient(Patient patient) 
+	{
 		Set<TestResult> testResultSet = new HashSet<>();
-		if(pr.findById(patient.getPatientId()).isPresent())
+		if(pr.findById(patient.getPatientId()).isEmpty())
 			throw new PatientNotFoundException("Patient is Not Found to View All Test Result");
-		for(Appointment a : patient.getAppointments()) {
+		for(Appointment a : patient.getAppointments()) 
+		{
 			testResultSet.addAll(a.getTestResult());
 		}
 		return testResultSet;		
 	}
 
 	@Override
-	public List<TestResult> getAllTestResults() {
+	public List<TestResult> getAllTestResults() 
+	{
+		System.out.println("Hello");
 		return testresultRepo.findAll();
 	}
-
 }

@@ -24,7 +24,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="diagnostic_center")
-public class DiagnosticCenter {
+public class DiagnosticCenter 
+{
+	
 	@Id
 	@Column(name="dcenter_id")
 	private int id;
@@ -48,12 +50,13 @@ public class DiagnosticCenter {
 
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	
-	public DiagnosticCenter() {
+	public DiagnosticCenter() 
+	{
 		super();
-		
 	}
 	
-	public DiagnosticCenter(int id, String name, String contactNo, String address, String contactEmail) {
+	public DiagnosticCenter(int id, String name, String contactNo, String address, String contactEmail) 
+	{
 		super();
 		this.id = id;
 		this.name = name;
@@ -62,9 +65,8 @@ public class DiagnosticCenter {
 		this.contactEmail = contactEmail;
 	}
 
-
-
-	public DiagnosticCenter(int id, String name, String contactNo, String address, String contactEmail, Set<DiagnosticTest> test) {
+	public DiagnosticCenter(int id, String name, String contactNo, String address, String contactEmail, Set<DiagnosticTest> test) 
+	{
 		super();
 		this.id = id;
 		this.name = name;
@@ -74,60 +76,74 @@ public class DiagnosticCenter {
 		this.tests = tests;
 	}
 
-	public int getId() {
+	public int getId() 
+	{
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(int id) 
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 
-	public String getContactNo() {
+	public String getContactNo() 
+	{
 		return contactNo;
 	}
 
-	public void setContactNo(String contactNo) {
+	public void setContactNo(String contactNo) 
+	{
 		this.contactNo = contactNo;
 	}
 
-	public String getAddress() {
+	public String getAddress() 
+	{
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(String address) 
+	{
 		this.address = address;
 	}
 
-	public String getContactEmail() {
+	public String getContactEmail() 
+	{
 		return contactEmail;
 	}
 
-	public void setContactEmail(String contactEmail) {
+	public void setContactEmail(String contactEmail) 
+	{
 		this.contactEmail = contactEmail;
 	}
 
 
- 	public Set<DiagnosticTest> getTests() {
+ 	public Set<DiagnosticTest> getTests() 
+ 	{
  		return tests;
  	}
  
- 	public void setTests(Set<DiagnosticTest> tests1) {
+ 	public void setTests(Set<DiagnosticTest> tests1) 
+ 	{
  		this.tests = tests1;
  	}
 
- 	public void addTestToCenter(DiagnosticTest t) {
+ 	public void addTestToCenter(DiagnosticTest t) 
+ 	{
  		this.getTests().add(t);
  	}
 	
-	public void addtest(DiagnosticTest t) {
+	public void addtest(DiagnosticTest t) 
+	{
 		this.getTests().add(t);
 	}
 	

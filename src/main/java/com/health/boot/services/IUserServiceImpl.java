@@ -13,13 +13,16 @@ import com.health.boot.exceptions.UserNotFoundException;
 import com.health.boot.repository.UserRepository;
 
 @Service
-public class IUserServiceImpl implements IUserService {
+public class IUserServiceImpl implements IUserService 
+{
 	
 	@Autowired
 	UserRepository ur;
 
+	
 	@Override
-	public User validateUser(String username, String password) throws RuntimeException {
+	public User validateUser(String username, String password) throws RuntimeException 
+	{
 		
 		Optional<User> u = ur.findById(username);
 		if(!u.isPresent())
@@ -31,28 +34,23 @@ public class IUserServiceImpl implements IUserService {
 
 		}
 
-
-
-
 	@Override
-	public User addUser(User user) {
-		
+	public User addUser(User user) 
+	{
 		Optional<User> u = ur.findById(user.getUsername());
 		if(u.isPresent())
 			throw new UserAlreadyExistException("Already an Account Exist with this user name");
 		User uu = ur.save(user);
-
 		return uu;
-	
 	}
 
 	@Override
-	public User removeUser(User user) {
+	public User removeUser(User user) 
+	{
 		Optional<User> u = ur.findById(user.getUsername());
 		if(!u.isPresent())
 			throw new UserNotFoundException("User is Not Found to Delete");
 		ur.delete(user);
 		return user;
 	}
-
-}
+	}

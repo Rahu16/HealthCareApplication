@@ -16,27 +16,30 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="Test_Result")
-public class TestResult implements Serializable{
+public class TestResult
+{
 
-	private static final long serialVersionUID = 1L;
+
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@NotEmpty(message="Enter the Test Readings")
 	private double testReading;
 	@NotEmpty(message="Enter the condition")
 	private String condition;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="appointment_no")
 	private Appointment appointment;
 
-	public TestResult() {
+	public TestResult() 
+	{
 		super();
 	}
 
-	public TestResult(int id, double testReading, String condition, Appointment appointment) {
+	public TestResult(int id, double testReading, String condition, Appointment appointment) 
+	{
 		super();
 		this.id = id;
 		this.testReading = testReading;
@@ -44,49 +47,51 @@ public class TestResult implements Serializable{
 		this.appointment = appointment;
 	}
 
-
-	public int getId() {
+	public int getId() 
+	{
 		return id;
 	}
 
-
-	public void setId(int id) {
+	public void setId(int id) 
+	{
 		this.id = id;
 	}
 
 
-	public double getTestReading() {
+	public double getTestReading() 
+	{
 		return testReading;
 	}
 
-
-	public void setTestReading(double testReading) {
+	public void setTestReading(double testReading) 
+	{
 		this.testReading = testReading;
 	}
 
-
-	public String getCondition() {
+	public String getCondition() 
+	{
 		return condition;
 	}
 
-
-	public void setCondition(String condition) {
+	public void setCondition(String condition) 
+	{
 		this.condition = condition;
 	}
 
-
-	public Appointment getAppointment() {
+	public Appointment getAppointment() 
+	{
 		return appointment;
 	}
 
-
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(Appointment appointment) 
+	{
 		this.appointment = appointment;
 	}
 
 
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "TestResult [id=" + id + ", testReading=" + testReading + ", condition=" + condition + "]";
 	}	
 }

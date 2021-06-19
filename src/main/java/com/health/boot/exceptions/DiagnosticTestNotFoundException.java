@@ -1,9 +1,10 @@
 package com.health.boot.exceptions;
 
-public class DiagnosticTestNotFoundException extends RuntimeException{
+public class DiagnosticTestNotFoundException extends RuntimeException
+{
 	
-	public DiagnosticTestNotFoundException(String msg) {
+	public DiagnosticTestNotFoundException(String msg) 
+	{
 		super(msg);
 	}
-
 }
