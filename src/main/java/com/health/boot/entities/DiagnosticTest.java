@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,16 +28,20 @@ public class DiagnosticTest
 {
 
 		@Id
-		//@GeneratedValue(strategy=GenerationType.IDENTITY)
 		@Column(name="dtest_id")
 		private int id;
 		@Column(name="testname")
+		@NotEmpty(message = "Test Name must not be empty")
+		@Size(min=4,message="Name should be more than 3 Characters")
 		private String testName;
 		@Column(name="testprice")
+		@Min(value=100)
 		private double testPrice;
 		@Column(name="normalvalue")
+		@NotEmpty(message = "Value must not be empty")
 		private String normalValue;
 		@Column(name="units")
+		@NotEmpty(message = "Units must not be empty")
 		private String units;
 		@JsonIgnore
  		@ManyToMany(mappedBy="tests",fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 /// User Entity is Created
@@ -21,10 +23,13 @@ public class User
 	
 	@Id
 	@Column(name= "username")
+	@Size(min=4,message="Minimum characters required for username are four")
 	private String username;
 	@Column(name= "password")
+	@Size(min=5,message="Minimum characters required for password are five")
 	private String password;
 	@Column(name= "role")
+	@NotEmpty(message="Role should not be empty")
 	private String role;
 	
 	public User() 

@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,10 +31,10 @@ public class DiagnosticCenter
 	@Column(name="dcenter_id")
 	private int id;
 	@Column(name="centername")
-	@NotEmpty(message = "Email must not be empty")
+	@NotEmpty(message = "CenterName must not be empty")
 	private String name;
 	@Column(name="contactno")
-	@NotEmpty(message = "ContactNo must not be empty")
+	@Size(min=10,max=13,message="Incorrect Phone Number Format")
 	private String contactNo;
 	@Column(name="address")
 	@NotEmpty(message = "Address must not be empty")

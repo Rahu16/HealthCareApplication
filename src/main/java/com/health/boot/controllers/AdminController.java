@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,28 +61,28 @@ public class AdminController
 	
 	
 	@PostMapping("/newDiagnosticCenter")
-	public ResponseEntity<DiagnosticCenter> createNewDiagnosticCenter(@RequestBody DiagnosticCenter dc)
+	public ResponseEntity<DiagnosticCenter> createNewDiagnosticCenter(@Valid @RequestBody DiagnosticCenter dc)
 	{
 		return new ResponseEntity<DiagnosticCenter>(dcs.createDiagnosticCenter(dc),HttpStatus.CREATED);
 	}
 	
 	
 	@PostMapping("/createNewTest")
-	public ResponseEntity<DiagnosticTest> createNewTest(@RequestBody DiagnosticTest t) 
+	public ResponseEntity<DiagnosticTest> createNewTest(@Valid @RequestBody DiagnosticTest t) 
 	{
 		return new ResponseEntity<DiagnosticTest>(dts.CreateNewTest(t),HttpStatus.CREATED);
 	}
 	
 	
 	@PutMapping("/updateTestDetails")
-	public ResponseEntity<DiagnosticTest> updateTestDetails(@RequestBody DiagnosticTest test)
+	public ResponseEntity<DiagnosticTest> updateTestDetails(@Valid @RequestBody DiagnosticTest test)
 	{
 		return new ResponseEntity<DiagnosticTest>(dts.updateTestDetail(test),HttpStatus.ACCEPTED);
 	}
 	
 	
 	@PutMapping("/updateCenterDetails")
-	public ResponseEntity<String> updateCenterDetails(@RequestBody DiagnosticCenter dc)
+	public ResponseEntity<String> updateCenterDetails(@Valid @RequestBody DiagnosticCenter dc)
 	{
 		return new ResponseEntity<String>(dcs.updateDiagnosticCenter(dc),HttpStatus.ACCEPTED);
 	}
@@ -125,7 +127,7 @@ public class AdminController
 	
 	
 	@PostMapping("/addTestResultToAppointment")
-	public ResponseEntity<String> addTestToAppointment(@RequestBody addTestResultObjHolder obj)
+	public ResponseEntity<String> addTestToAppointment(@Valid @RequestBody addTestResultObjHolder obj)
 	{
 		Appointment a = asi.viewAppointment(obj.getAppointId());
 		TestResult tr = new TestResult();

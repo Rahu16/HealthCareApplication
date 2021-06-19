@@ -35,18 +35,18 @@ class DiagnosticTestJunitTest
 	}
 	
 	// Test For CreateNewTest Method
-//	@Test
-//	void testCreateNewTest() {
-//		DiagnosticTest dt= new DiagnosticTest();
-//		dt.setId(111);
-//		dt.setNormalValue("med");
-//		dt.setTestName("Bronchoscopy1");
-//		dt.setUnits("M");
-//		dt.setTestPrice(3500);
-//		DiagnosticTest dt1=dts.CreateNewTest(dt);
+	@Test
+	void testCreateNewTest() {
+		DiagnosticTest dt= new DiagnosticTest();
+		dt.setId(790);
+		dt.setNormalValue("56");
+		dt.setTestName("Arteries");
+		dt.setUnits("kkd");
+		dt.setTestPrice(6540);
+		DiagnosticTest dt1=dts.CreateNewTest(dt);
 	
-//		assertEquals(dt.toString(),dt1.toString());
-//	}
+		assertEquals(dt.toString(),dt1.toString());
+	}
 	
 	// Test For AllreadyDiagnosticTestExistException in CreateNewTest Method
 	@Test
@@ -80,7 +80,7 @@ class DiagnosticTestJunitTest
 	void exceptionTestUpdateTestDetail() 
 	{
 		DiagnosticTest dt= new DiagnosticTest();
-		dt.setId(141);
+		dt.setId(140);
 		dt.setNormalValue("med");
 		dt.setTestName("Bronchoscopy1");
 		dt.setUnits("M");
@@ -109,7 +109,7 @@ class DiagnosticTestJunitTest
 //	@Test
 //	void testRemoveTestFromDiagnosticCenter() {
 //		int centerId=1221;
-//		int testId=143;
+//		int testId=255;
 //		DiagnosticTest dt=dts.removeTestFromDiagnosticCenter(centerId, testId);
 //		assertEquals(dt.getId(),testId);
 //	}
@@ -146,7 +146,7 @@ class DiagnosticTestJunitTest
 	void testGetTestsOfDiagnosticCenter() 
 	{
 		int centerId=1221;
-		int l1=2;
+		int l1=1;
 		int l2=dts.getTestsOfDiagnosticCenter(centerId).size();
 		assertEquals(l2,l1);
 	}

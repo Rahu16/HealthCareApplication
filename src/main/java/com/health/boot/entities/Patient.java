@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,10 +25,15 @@ public class Patient
 	
 	@Id
 	@Column(name="patientid")
+	@NotNull(message = "Patient Id must not be empty")
 	private int patientId;
+	@NotEmpty(message = "Name must not be empty")
 	private String name;
+	@Size(min=10,max=13,message="Incorrect Phone Number Format")
 	private String phoneNo;
+	@Min(value=5,message="minimum age is 5")
 	private int age;
+	@NotEmpty(message = "Gender must not be empty")
 	private String gender;
 	
 	@JsonIgnore
