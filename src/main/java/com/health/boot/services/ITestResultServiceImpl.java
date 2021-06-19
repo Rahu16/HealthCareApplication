@@ -85,6 +85,7 @@ public class ITestResultServiceImpl implements ITestResultService
 	@Override
 	public List<TestResult> getAllTestResults() 
 	{
+		System.out.println("Hello");
 		return testresultRepo.findAll();
 	}
 }

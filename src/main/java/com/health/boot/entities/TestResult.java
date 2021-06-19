@@ -15,10 +15,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Test_Result")
-public class TestResult implements Serializable
+public class TestResult
 {
 
-	private static final long serialVersionUID = 1L;
+
 
 	@Id
 //	@GeneratedValue(strategy=GenerationType.IDENTITY)

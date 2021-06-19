@@ -134,9 +134,6 @@ public class AdminController
 		tr.setCondition(obj.getCondition());
 		tr.setAppointment(a);
 		trs.addTestResult(tr);
-//		a.getTestResult().add(tr);
-		System.out.println("hello");
-//		asi.updateAppointment(a);
 		return new ResponseEntity<String>("Test result is added to the Appointment",HttpStatus.ACCEPTED);
 	}
 	
