@@ -1,6 +1,7 @@
 package com.health.boot.services;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -60,11 +61,12 @@ public class ITestResultServiceImpl implements ITestResultService
 	public TestResult removeTestResult(int id) 
 	{
 		Optional<TestResult> trOptional =  testresultRepo.findById(id);
-		if(trOptional.isPresent())
+		if(trOptional.isEmpty())
 			throw new TestResultNotFoundException("Test Result is Not Found to Delete");
 		int appointId = trOptional.get().getAppointment().getId();
 		Appointment a = ar.findById(appointId).get();
-		testresultRepo.deleteById(id);
+		a.getTestResult().remove(trOptional.get());
+//		testresultRepo.deleteById(id);
 		ar.save(a);
 		return trOptional.get();	
 	}
@@ -85,7 +87,8 @@ public class ITestResultServiceImpl implements ITestResultService
 	@Override
 	public List<TestResult> getAllTestResults() 
 	{
-		System.out.println("Hello");
-		return testresultRepo.findAll();
+		List<TestResult> list = new ArrayList<>();
+		list.addAll(testresultRepo.findAll());
+		return list;
 	}
 }

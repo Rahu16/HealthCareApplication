@@ -33,11 +33,11 @@ public class AppointmentServiceTests {
 	
 	@Test
 	void testAddAppointment() {
+		Patient p  =pr.findById(100).get();
 		Appointment a = new Appointment();
 		a.setId(300);
 		a.setApprovalStatus(ApprovalStatus.approved);
 		a.setAppointmentDate(LocalDate.of(2021, 6, 11));
-		Patient p  =new Patient(111,"Hasibul","8116282819",22,"Male");
 		a.setPatient(p);
 		Appointment a2 = as.addAppointment(a);
 		assertTrue(a.getId()==a2.getId());
@@ -46,26 +46,25 @@ public class AppointmentServiceTests {
 	@Test
 	void testViewAppointments() {
 		
-		Patient p = pr.findById(111).get();
+		Patient p = pr.findById(100).get();
 		Set<Appointment> set1 = p.getAppointments();
-//		for(Appointment a : p.getAppointments()) {
-//			System.out.println(a.getId());
-//		}
+		System.out.println(set1.size());
 		Set<Appointment> set2 = as.viewAppointments(p.getName());
-		equals(set1.equals(set2));
+		System.out.println(set2.size());
+		assertTrue(set1.size()==set2.size());
 	}
 	
 	@Test
 	void testViewAppointment() {
-		Appointment a = ar.findById(200).get();
-		Appointment a2 = as.viewAppointment(200);
+		Appointment a = ar.findById(123).get();
+		Appointment a2 = as.viewAppointment(123);
 		assertTrue(a.getId()==a2.getId());
 	}
 	
 	@Test
 	void testUpdateAppointment() {
-		Appointment a = ar.findById(400).get();
-		a.setApprovalStatus(ApprovalStatus.approved);
+		Appointment a = ar.findById(123).get();
+		a.setApprovalStatus(ApprovalStatus.cancelled);
 		Appointment a2 = as.updateAppointment(a);
 		assertTrue(a.getApprovalStatus().equals(a2.getApprovalStatus()));
 	}
@@ -79,7 +78,7 @@ public class AppointmentServiceTests {
 	
 	@Test
 	void testAddAppointmentException() {
-		Appointment a = ar.findById(400).get();
+		Appointment a = ar.findById(123).get();
 		assertThrows(AppointmentExistException.class,()->as.addAppointment(a),"testAddAppointmentException() method should throw Exception");
 	}
 	
@@ -108,7 +107,7 @@ public class AppointmentServiceTests {
 	@Test
 	void testUpdateAppointmentException() {
 		Appointment a = new Appointment();
-		a.setId(300);
+		a.setId(600);
 		a.setApprovalStatus(ApprovalStatus.approved);
 		a.setAppointmentDate(LocalDate.of(2021, 6, 11));
 		Patient p  =new Patient(222,"Mokul","8116282819",28,"Male");

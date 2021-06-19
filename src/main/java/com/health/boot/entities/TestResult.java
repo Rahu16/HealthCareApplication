@@ -1,7 +1,7 @@
 package com.health.boot.entities;
 
 
-import java.io.Serializable;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -28,6 +30,7 @@ public class TestResult
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="appointment_no")
+	@JsonIgnore
 	private Appointment appointment;
 
 	public TestResult() 

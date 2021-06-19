@@ -37,7 +37,7 @@ public class ITestResultServiceImplTests
 	@Test
 	void testAddTestResult()
 	{
-	Appointment a = ar.findById(222).get();
+	Appointment a = ar.findById(123).get();
 		TestResult t1=new TestResult();
 		t1.setId(4);
 		t1.setTestReading(11);
@@ -50,9 +50,9 @@ public class ITestResultServiceImplTests
 	@Test
 	void testUpdateTestResult()
 	{
-		Appointment a = ar.findById(111).get();
+		Appointment a = ar.findById(123).get();
 		TestResult t1=new TestResult();
-		t1.setId(5);
+		t1.setId(4);
 		t1.setTestReading(13);
 		t1.setCondition("Good");
 		t1.setAppointment(a);
@@ -63,8 +63,8 @@ public class ITestResultServiceImplTests
 	@Test
 	void testRemoveTestResult()
 	{
-	TestResult t2=testService.removeTestResult(12);
-	assertTrue(t2.getId()==12);
+	TestResult t2=testService.removeTestResult(4);
+	assertTrue(t2.getId()==4);
 	}
 	
 	@Test
@@ -73,23 +73,24 @@ public class ITestResultServiceImplTests
 		Patient p = pr.findById(100).get();
 		Set<TestResult> testResultSet = testService.viewResultsByPatient(p);
 		System.out.println(testResultSet);
-		assertTrue(testResultSet.size()==5);
+		assertTrue(testResultSet.size()==2);
 	}	
 	
 	@Test
 	void testAllTestResult()
 	{
-		assertTrue(testService.getAllTestResults().size()==5);
+		System.out.println(testService.getAllTestResults());
+		assertTrue(testService.getAllTestResults().size()==1);
 	}	
 	
 	@Test
 	void testAddTestResultException() 
 	{
-		Appointment a = ar.findById(111).get();
+		Appointment a = ar.findById(123).get();
 		TestResult tt1 = new TestResult();
-		tt1.setId(5);
-		tt1.setTestReading(09.00);
-		tt1.setCondition("not stable");
+		tt1.setId(1221);
+		tt1.setTestReading(15);
+		tt1.setCondition("Bad");
 		tt1.setAppointment(a);
 		assertThrows(TestResultExistException.class,()->testService.addTestResult(tt1),"testAddTestResultException() should throw exception");
 	}
@@ -97,10 +98,10 @@ public class ITestResultServiceImplTests
 	@Test
 	void testUpdateTestResultException() 
 	{
-		Appointment a = ar.findById(111).get();
+		Appointment a = ar.findById(123).get();
 		TestResult tt1 = new TestResult();
-		tt1.setId(30);
-		tt1.setTestReading(09.00);
+		tt1.setId(12);
+		tt1.setTestReading(9);
 		tt1.setCondition("not stable");
 		tt1.setAppointment(a);
 		assertThrows(TestResultNotFoundException.class,()->testService.updateTestResult(tt1),"testUpdateTestResultException() should throw exception");
@@ -115,7 +116,7 @@ public class ITestResultServiceImplTests
 	@Test
 	void testViewTestResultByPatientException() 
 	{
-		Patient p = pr.findById(200).get();
+		Patient p = new Patient(220,"Rahu","8116291022",25,"Male");
 		assertThrows(PatientNotFoundException.class,()->testService.viewResultsByPatient(p),"testViewTestResultByPatientException() should throw exception");
 	}	
 }
