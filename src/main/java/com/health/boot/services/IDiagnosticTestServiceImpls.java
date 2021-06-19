@@ -64,8 +64,8 @@ public class IDiagnosticTestServiceImpls implements IDiagnosticTestService{
 	
 	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) {
-		DiagnosticCenter dc=dcr.findById(centerId).get();
-		if(dc==null) {
+		Optional<DiagnosticCenter> dc=dcr.findById(centerId);
+		if(dc.isEmpty()) {
 			throw new DiagnosticCenterNotFoundException("Center not found with id "+centerId);
 		}
 		else {

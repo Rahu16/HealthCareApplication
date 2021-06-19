@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -23,6 +26,7 @@ public class Appointment {
 	@Id
 //	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@DateTimeFormat(pattern = "yyyy-MM-dd") 
 	private LocalDate appointmentDate;
 	private ApprovalStatus approvalStatus;
 	

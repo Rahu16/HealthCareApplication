@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -22,7 +23,9 @@ public class TestResult implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotEmpty(message="Enter the Test Readings")
 	private double testReading;
+	@NotEmpty(message="Enter the condition")
 	private String condition;
 
 	@ManyToOne(cascade=CascadeType.ALL)
