@@ -124,12 +124,19 @@ public class AdminController
 	}
 	
 	
-	@PostMapping("/{appointId}/addTestResult")
-	public ResponseEntity<String> addTestToAppointment(@PathVariable("appointId") int appointId, @RequestBody TestResult tr)
+	@PostMapping("/addTestResultToAppointment")
+	public ResponseEntity<String> addTestToAppointment(@RequestBody addTestResultObjHolder obj)
 	{
-		Appointment a = asi.viewAppointment(appointId);
-		a.getTestResult().add(tr);
-		asi.updateAppointment(a);
+		Appointment a = asi.viewAppointment(obj.getAppointId());
+		TestResult tr = new TestResult();
+		tr.setId(obj.getId());
+		tr.setTestReading(obj.getTestReading());
+		tr.setCondition(obj.getCondition());
+		tr.setAppointment(a);
+		trs.addTestResult(tr);
+//		a.getTestResult().add(tr);
+		System.out.println("hello");
+//		asi.updateAppointment(a);
 		return new ResponseEntity<String>("Test result is added to the Appointment",HttpStatus.ACCEPTED);
 	}
 	
@@ -179,4 +186,5 @@ public class AdminController
 	{
 		return new ResponseEntity<Patient>(psi.viewPatient(id),HttpStatus.ACCEPTED);
 	}
+	
 }
