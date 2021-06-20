@@ -33,7 +33,7 @@ public class ITestResultServiceImplTests
 	@Autowired
 	PatientRepository pr;
 	
-	
+	//Test for AddTestResult Method
 	@Test
 	void testAddTestResult()
 	{
@@ -47,6 +47,7 @@ public class ITestResultServiceImplTests
 		assertTrue(t1.getTestReading() == t2.getTestReading());
 		}
 	
+	//Test for UpdateTestResult Method
 	@Test
 	void testUpdateTestResult()
 	{
@@ -59,7 +60,8 @@ public class ITestResultServiceImplTests
 		TestResult t2=testService.updateTestResult(t1);
 		assertTrue(t1.getId()==t2.getId());
 	}
-
+	
+	//Test for RemoveTestResult Method
 	@Test
 	void testRemoveTestResult()
 	{
@@ -67,6 +69,7 @@ public class ITestResultServiceImplTests
 	assertTrue(t2.getId()==4);
 	}
 	
+	//Test for ViewTestResultByPatient Method
 	@Test
 	void testViewTestResultByPatient()
 	{
@@ -76,6 +79,7 @@ public class ITestResultServiceImplTests
 		assertTrue(testResultSet.size()==2);
 	}	
 	
+	//Test for AllTestResult Method
 	@Test
 	void testAllTestResult()
 	{
@@ -83,6 +87,7 @@ public class ITestResultServiceImplTests
 		assertTrue(testService.getAllTestResults().size()==1);
 	}	
 	
+	//Test for TestResultExistException for AddTestResult Method 
 	@Test
 	void testAddTestResultException() 
 	{
@@ -95,6 +100,7 @@ public class ITestResultServiceImplTests
 		assertThrows(TestResultExistException.class,()->testService.addTestResult(tt1),"testAddTestResultException() should throw exception");
 	}
 	
+	//Test for TestResultNotFoundException for UpdateTestResult Method
 	@Test
 	void testUpdateTestResultException() 
 	{
@@ -107,12 +113,14 @@ public class ITestResultServiceImplTests
 		assertThrows(TestResultNotFoundException.class,()->testService.updateTestResult(tt1),"testUpdateTestResultException() should throw exception");
 	}
 	
+	//Test for TestResultNotFoundException for RemoveTestResult Method
 	@Test
 	void testRemoveTestResultException() 
 	{
 		assertThrows(TestResultNotFoundException.class,()->testService.removeTestResult(26),"testRemoveTestResultException() should throw exception");
 	}
 	
+	//Test for PatientFoundException for ViewTestResultByPatient Method
 	@Test
 	void testViewTestResultByPatientException() 
 	{
