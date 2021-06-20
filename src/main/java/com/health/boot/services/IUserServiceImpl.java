@@ -19,7 +19,7 @@ public class IUserServiceImpl implements IUserService
 	@Autowired
 	UserRepository ur;
 
-	
+	// Validating User
 	@Override
 	public User validateUser(String username, String password) throws RuntimeException 
 	{
@@ -33,7 +33,8 @@ public class IUserServiceImpl implements IUserService
 		throw new UserIdPasswordInvalidException("Password is Incorrect");
 
 		}
-
+	
+	// Adding User
 	@Override
 	public User addUser(User user) 
 	{
@@ -43,7 +44,8 @@ public class IUserServiceImpl implements IUserService
 		User uu = ur.save(user);
 		return uu;
 	}
-
+	
+	// Removing User
 	@Override
 	public User removeUser(User user) 
 	{
