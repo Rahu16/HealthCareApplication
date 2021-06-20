@@ -74,10 +74,6 @@ public class  IPatientServiceImpl implements IPatientService
 		return list;
 	}
 
-	@Override
-	public TestResult viewTestResult(int testResultId) throws RuntimeException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

@@ -10,5 +10,5 @@ public interface IPatientService
 	Patient registerPatient(Patient patient) throws RuntimeException;
 	Patient updatePatientDetails(Patient patient);
 	Patient viewPatient(String patientUserName);
-
+	public List<TestResult> getAllTestResult(String patientUserName) throws RuntimeException;
 }
