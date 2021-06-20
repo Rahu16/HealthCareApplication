@@ -1,15 +1,11 @@
 package com.health.boot.services;
 
-import java.awt.dnd.DragSourceContext;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.health.boot.entities.Appointment;
@@ -19,7 +15,6 @@ import com.health.boot.exceptions.DiagnosticCenterAlReadyExistsException;
 import com.health.boot.exceptions.DiagnosticCenterNotFoundException;
 import com.health.boot.exceptions.DiagnosticTestNotFoundException;
 import com.health.boot.repository.AppointmentRepository;
-//import com.health.boot.repository.AppointmentRepository;
 import com.health.boot.repository.DiagnosticCenterRepository;
 import com.health.boot.repository.DiagnosticTestRepository;
 
