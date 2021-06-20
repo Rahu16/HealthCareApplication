@@ -22,7 +22,7 @@ public class  IPatientServiceImpl implements IPatientService
 	@Autowired
 	PatientRepository pr;
 
-	
+	/// It is used to create a new patient
 	@Override
 	public Patient registerPatient(Patient patient) throws RuntimeException 
 	{
@@ -30,7 +30,8 @@ public class  IPatientServiceImpl implements IPatientService
 			throw new PatientExistException("Patient is already exist with the same Id");
 		return pr.save(patient);
 	}
-
+	
+	/// It is used to update patient details
 	@Override
 	public Patient updatePatientDetails(Patient patient) 
 	{
@@ -38,7 +39,8 @@ public class  IPatientServiceImpl implements IPatientService
 			throw new PatientNotFoundException("Patient is Not Found to Update");
 		return pr.save(patient);
 	}
-
+	
+	/// It returns patient details by giving the argument as patient userName.
 	@Override
 	public Patient viewPatient(String patientUserName) 
 	{
@@ -48,6 +50,8 @@ public class  IPatientServiceImpl implements IPatientService
 		return p;
 	}
 	
+	
+	/// It returns patient details by giving the argument as patient id.
 	public Patient viewPatient(int patientId) 
 	{		
 		Optional<Patient> p = pr.findById(patientId);
@@ -56,13 +60,15 @@ public class  IPatientServiceImpl implements IPatientService
 		return p.get();
 	}
 	
+	/// It is used to remove the patient.
 	public Patient removePatient(int pid) 
 	{
 		Patient p = viewPatient(pid);
 		pr.deleteById(pid);
 		return p;
 	}
-
+	
+	/// It returns the list of all test results of particular result.
 	@Override
 	public List<TestResult> getAllTestResult(String patientUserName) throws RuntimeException {
 		List<TestResult> list = new ArrayList<>();
