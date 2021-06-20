@@ -13,7 +13,6 @@ import com.health.boot.entities.Appointment;
 import com.health.boot.entities.ApprovalStatus;
 import com.health.boot.entities.DiagnosticTest;
 import com.health.boot.entities.Patient;
-import com.health.boot.entities.TestResult;
 import com.health.boot.exceptions.AppointmentExistException;
 import com.health.boot.exceptions.AppointmentNotFoundException;
 import com.health.boot.exceptions.PatientNotFoundException;
@@ -21,6 +20,7 @@ import com.health.boot.repository.AppointmentRepository;
 import com.health.boot.repository.ITestResultRepository;
 import com.health.boot.repository.PatientRepository;
 
+///// All Service methods are Implemented here for Appointment
 @Service
 public class IAppointmentServiceImpl implements IAppointmentService
 {
@@ -38,6 +38,8 @@ public class IAppointmentServiceImpl implements IAppointmentService
 	IDiagnosticCenterService dcs;
 	
 	
+	
+	/// Adding an Appointment to a particular Patient
 	@Override
 	public Appointment addAppointment(Appointment appointment) throws RuntimeException 
 	{
@@ -49,6 +51,8 @@ public class IAppointmentServiceImpl implements IAppointmentService
 		return ar.save(appointment);
 	}
 
+	
+	/// Removing an Appointment from a Particular Patient and returning the Appointment
 	@Override
 	public Appointment removeAppointment(Appointment appointment) throws RuntimeException 
 	{
@@ -63,6 +67,8 @@ public class IAppointmentServiceImpl implements IAppointmentService
 		return appoint;
 	}
 
+	
+	/// Getting a Set of Appointments for a Particular Patient by giving Patient's name as an Arguement
 	@Override
 	public Set<Appointment> viewAppointments(String patientName) throws AppointmentNotFoundException 
 	{
@@ -72,6 +78,8 @@ public class IAppointmentServiceImpl implements IAppointmentService
 		return p.getAppointments();
 	}
 
+	
+	/// Getting an Appointment Object just by AppointmentId
 	@Override
 	public Appointment viewAppointment(int appointmentId) throws AppointmentNotFoundException 
 	{
@@ -81,6 +89,8 @@ public class IAppointmentServiceImpl implements IAppointmentService
 		return a.get();
 	}
 
+	
+	/// Updating an Appointment Details by passing the Appointment Object
 	@Override
 	public Appointment updateAppointment(Appointment appointment) throws AppointmentNotFoundException 
 	{
@@ -93,6 +103,8 @@ public class IAppointmentServiceImpl implements IAppointmentService
 		return a;
 }
 
+	
+	/// Getting a list of Appointments for a Particular Diagnostic Test in a particular Diagnostic Center
 	@Override
 	public List<Appointment> getApppointmentList(int centreId, String test, ApprovalStatus status) throws RuntimeException 
 	{

@@ -33,11 +33,11 @@ public class ITestResultServiceImplTests
 	@Autowired
 	PatientRepository pr;
 	
-	
+	//Test for AddTestResult Method
 	@Test
 	void testAddTestResult()
 	{
-	Appointment a = ar.findById(222).get();
+	Appointment a = ar.findById(123).get();
 		TestResult t1=new TestResult();
 		t1.setId(4);
 		t1.setTestReading(11);
@@ -47,75 +47,84 @@ public class ITestResultServiceImplTests
 		assertTrue(t1.getTestReading() == t2.getTestReading());
 		}
 	
+	//Test for UpdateTestResult Method
 	@Test
 	void testUpdateTestResult()
 	{
-		Appointment a = ar.findById(111).get();
+		Appointment a = ar.findById(123).get();
 		TestResult t1=new TestResult();
-		t1.setId(5);
+		t1.setId(4);
 		t1.setTestReading(13);
 		t1.setCondition("Good");
 		t1.setAppointment(a);
 		TestResult t2=testService.updateTestResult(t1);
 		assertTrue(t1.getId()==t2.getId());
 	}
-
+	
+	//Test for RemoveTestResult Method
 	@Test
 	void testRemoveTestResult()
 	{
-	TestResult t2=testService.removeTestResult(12);
-	assertTrue(t2.getId()==12);
+	TestResult t2=testService.removeTestResult(4);
+	assertTrue(t2.getId()==4);
 	}
 	
+	//Test for ViewTestResultByPatient Method
 	@Test
 	void testViewTestResultByPatient()
 	{
 		Patient p = pr.findById(100).get();
 		Set<TestResult> testResultSet = testService.viewResultsByPatient(p);
 		System.out.println(testResultSet);
-		assertTrue(testResultSet.size()==5);
+		assertTrue(testResultSet.size()==2);
 	}	
 	
+	//Test for AllTestResult Method
 	@Test
 	void testAllTestResult()
 	{
-		assertTrue(testService.getAllTestResults().size()==5);
+		System.out.println(testService.getAllTestResults());
+		assertTrue(testService.getAllTestResults().size()==1);
 	}	
 	
+	//Test for TestResultExistException for AddTestResult Method 
 	@Test
 	void testAddTestResultException() 
 	{
-		Appointment a = ar.findById(111).get();
+		Appointment a = ar.findById(123).get();
 		TestResult tt1 = new TestResult();
-		tt1.setId(5);
-		tt1.setTestReading(09.00);
-		tt1.setCondition("not stable");
+		tt1.setId(1221);
+		tt1.setTestReading(15);
+		tt1.setCondition("Bad");
 		tt1.setAppointment(a);
 		assertThrows(TestResultExistException.class,()->testService.addTestResult(tt1),"testAddTestResultException() should throw exception");
 	}
 	
+	//Test for TestResultNotFoundException for UpdateTestResult Method
 	@Test
 	void testUpdateTestResultException() 
 	{
-		Appointment a = ar.findById(111).get();
+		Appointment a = ar.findById(123).get();
 		TestResult tt1 = new TestResult();
-		tt1.setId(30);
-		tt1.setTestReading(09.00);
+		tt1.setId(12);
+		tt1.setTestReading(9);
 		tt1.setCondition("not stable");
 		tt1.setAppointment(a);
 		assertThrows(TestResultNotFoundException.class,()->testService.updateTestResult(tt1),"testUpdateTestResultException() should throw exception");
 	}
 	
+	//Test for TestResultNotFoundException for RemoveTestResult Method
 	@Test
 	void testRemoveTestResultException() 
 	{
 		assertThrows(TestResultNotFoundException.class,()->testService.removeTestResult(26),"testRemoveTestResultException() should throw exception");
 	}
 	
+	//Test for PatientFoundException for ViewTestResultByPatient Method
 	@Test
 	void testViewTestResultByPatientException() 
 	{
-		Patient p = pr.findById(200).get();
+		Patient p = new Patient(220,"Rahu","8116291022",25,"Male");
 		assertThrows(PatientNotFoundException.class,()->testService.viewResultsByPatient(p),"testViewTestResultByPatientException() should throw exception");
 	}	
 }

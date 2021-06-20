@@ -18,11 +18,8 @@ public class IUserServiceImpl implements IUserService
 	
 	@Autowired
 	UserRepository ur;
-	
-	
-	/* This method validates whether the entered username and password are correct or not.
-	 *  If the username is already present in database then it throws an UserNotFoundException.
-	 */
+
+	// Validating User
 	@Override
 	public User validateUser(String username, String password) throws RuntimeException 
 	{
@@ -37,10 +34,7 @@ public class IUserServiceImpl implements IUserService
 
 		}
 	
-	
-	/*  This method is used to create new user
-	 *  If there is already a username present then it throws an UserAlreadyExistException
-	 */
+	// Adding User
 	@Override
 	public User addUser(User user) 
 	{
@@ -51,10 +45,7 @@ public class IUserServiceImpl implements IUserService
 		return uu;
 	}
 	
-	
-	/*  This method is used to delete the user
-	 *  if the username is not registered then it throws an UserNotFoundException
-	 */
+	// Removing User
 	@Override
 	public User removeUser(User user) 
 	{

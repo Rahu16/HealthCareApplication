@@ -19,9 +19,7 @@ public class UserServiceImplTests
 	@Autowired
 	private IUserService usi;
 
-	/*  Testing whether the validation of user details is working properly or not 
-	 * 
-	 */
+	// Test for Validating User
 	@Test
 	void testValidateUser() 
 	{
@@ -34,10 +32,7 @@ public class UserServiceImplTests
 		assertEquals(u.toString(),u1.toString());
 	}
 	
-	
-	/* Testing AddUser method, whether the new user is created or not
-	 * 
-	 */
+	// Test for Adding User
 	@Test
 	void testAddUser() 
 	{
@@ -50,8 +45,7 @@ public class UserServiceImplTests
 		assertTrue(u.toString().equals(u1.toString()));
 	}
 	
-	
-	/// Testing whether method is throwing the UserAlreadyExistException or not if the argument of method is already exists
+	// Test for AddUserAlreadyExistException
 	@Test
 	void testAddUserAlreadyExistException() 
 	{
@@ -63,7 +57,7 @@ public class UserServiceImplTests
 		assertThrows(UserAlreadyExistException.class,()->usi.addUser(u1),"testAddUserAlreadyExistException() should throw exception");
 	}
 	
-	/// Testing whether method is throwing the UserIdPasswordInvalidException or not if the argument password is not correct
+	// Test for ValidateUserIdPasswordException
 	@Test
 	void testValidateUserIdPasswordException() 
 	{
@@ -75,7 +69,7 @@ public class UserServiceImplTests
 		assertThrows(UserIdPasswordInvalidException.class,()->usi.validateUser(u1.getUsername(), u1.getPassword()),"testValidateUserIdPasswordException() should throw exception");
 	}
 	
-	/// Testing whether method is creating a new user or not
+	// Test for Removing User
 	@Test
 	void testRemoveUser() 
 	{
@@ -88,7 +82,7 @@ public class UserServiceImplTests
 		assertTrue(u.toString().equals(u1.toString()));
 	}
 	
-	/// Testing whether method is throwing UserNotFoundException or not, if the username is incorrect. 
+	// Test for ValidateUserNotFoundException
 	@Test
 	void testValidateUserNotFoundException() 
 	{
@@ -100,8 +94,8 @@ public class UserServiceImplTests
 		assertThrows(UserNotFoundException.class,()->usi.validateUser(u1.getUsername(),u1.getPassword()),"testValidateUserNotFoundException() method should throw Exception");
 	}
 	
-	/// Testing whether method is throwing UserNotFoundException or not, if the username is incorrect.
-	@Test 
+	// Test for RemoveUserNotFoundException
+	@Test
 	void testRemoveUserNotFoundException() 
 	{
 		User u1 = new User();

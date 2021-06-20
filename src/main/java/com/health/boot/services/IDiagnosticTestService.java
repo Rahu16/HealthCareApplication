@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.health.boot.entities.DiagnosticTest;
 
-public interface IDiagnosticTestService 
+
+/// Interface for all the the service methods
+public interface IDiagnosticTestService
 {
-	
 	public List<DiagnosticTest> getAllTest();
 	DiagnosticTest CreateNewTest(DiagnosticTest test);
  	List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId);

@@ -25,12 +25,12 @@ public class IDiagnosticTestServiceImpls implements IDiagnosticTestService
 	
 	@Autowired
 	DiagnosticCenterRepository dcr;
-	
+	//List Out All Test
 	@Override
 	public List<DiagnosticTest> getAllTest(){
 		return dtr.findAll();
 	}
-	
+	//Creating new Test
 	@Override
 	public DiagnosticTest CreateNewTest(DiagnosticTest test) {
 		int testid=test.getId();
@@ -42,7 +42,7 @@ public class IDiagnosticTestServiceImpls implements IDiagnosticTestService
 		else 
 		throw new AllreadyDiagnosticTestExistException("Test with id "+testid+" exists already");
 	}
-	
+	//Updating Test Details by Test ID
 	@Override
 	public DiagnosticTest updateTestDetail(DiagnosticTest test) 
 	{
@@ -58,7 +58,7 @@ public class IDiagnosticTestServiceImpls implements IDiagnosticTestService
 			 return test;
 			 }
 	}
-	
+	//Removing Test From DiagnosticCenter by ID
 	@Override
 	public DiagnosticTest removeTestFromDiagnosticCenter(int centerId, int testId) 
 	{
@@ -82,7 +82,7 @@ public class IDiagnosticTestServiceImpls implements IDiagnosticTestService
 		throw new DiagnosticCenterNotFoundException("Center Not Found with id "+centerId);
 		
 	}
-	
+	//Listing out Tests of a Diagnostic Center by CenterID
 	@Override
 	public List<DiagnosticTest> getTestsOfDiagnosticCenter(int centerId) 
 	{
@@ -102,7 +102,7 @@ public class IDiagnosticTestServiceImpls implements IDiagnosticTestService
 		return list;
 		}
 		}
-	
+	//Fetching Test by ID
 	public DiagnosticTest testById(int id) {
 		Optional<DiagnosticTest> test =dtr.findById(id);
 		if(test.isEmpty()) 

@@ -23,22 +23,23 @@ import com.health.boot.services.IDiagnosticTestServiceImpls;
 public class DiagnosticTestController {
 	@Autowired
 	IDiagnosticTestService dts;
-
+	
+	//Fetching All Test
 	@GetMapping("/getAllTests")
 	public ResponseEntity<List> getAllTests(){
 		return new ResponseEntity<List>(dts.getAllTest(),HttpStatus.ACCEPTED);
 	}
-	
+	//Fetching Test by ID
 	@GetMapping("testById/{id}")
 	public ResponseEntity<DiagnosticTest> searchTestById(@PathVariable("id")int id) {
 		return new ResponseEntity<DiagnosticTest>(dts.testById(id),HttpStatus.ACCEPTED);
 	}
-
+	//Fetching Test Center by ID
 	@GetMapping("center/{id}")
 	public ResponseEntity<List> getTestsOfDiagnosticCenter(@PathVariable("id")int centerId){
 		return new ResponseEntity<List>(dts.getTestsOfDiagnosticCenter(centerId),HttpStatus.ACCEPTED);
 	}
-	
+	//Fetching Test by Test Name
 	@GetMapping("searchTestByName/{testName}")
 	public ResponseEntity<DiagnosticTest> searchTestByName(@PathVariable ("testName") String testName){
 		List<DiagnosticTest> list=dts.getAllTest();

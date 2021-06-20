@@ -1,9 +1,6 @@
 package com.health.boot.services;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.http.ResponseEntity;
 
 import com.health.boot.entities.Appointment;
 import com.health.boot.entities.DiagnosticCenter;
