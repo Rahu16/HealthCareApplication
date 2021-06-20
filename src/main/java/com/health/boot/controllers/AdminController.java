@@ -189,4 +189,10 @@ public class AdminController
 		return new ResponseEntity<Patient>(psi.viewPatient(id),HttpStatus.ACCEPTED);
 	}
 	
+	
+	@GetMapping("/{patientName}/getAllTestresultByPatient")
+	public ResponseEntity<List> getAllTestResultByPatient(@PathVariable("patientName") String name){
+		return new ResponseEntity<List>(psi.getAllTestResult(name),HttpStatus.OK);
+	}
+	
 }
