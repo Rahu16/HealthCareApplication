@@ -19,7 +19,7 @@ public class UserServiceImplTests
 	@Autowired
 	private IUserService usi;
 
-	
+	// Test for Validating User
 	@Test
 	void testValidateUser() 
 	{
@@ -32,6 +32,7 @@ public class UserServiceImplTests
 		assertEquals(u.toString(),u1.toString());
 	}
 	
+	// Test for Adding User
 	@Test
 	void testAddUser() 
 	{
@@ -44,6 +45,7 @@ public class UserServiceImplTests
 		assertTrue(u.toString().equals(u1.toString()));
 	}
 	
+	// Test for AddUserAlreadyExistException
 	@Test
 	void testAddUserAlreadyExistException() 
 	{
@@ -54,7 +56,8 @@ public class UserServiceImplTests
 		u1.setRole("patient");
 		assertThrows(UserAlreadyExistException.class,()->usi.addUser(u1),"testAddUserAlreadyExistException() should throw exception");
 	}
-
+	
+	// Test for ValidateUserIdPasswordException
 	@Test
 	void testValidateUserIdPasswordException() 
 	{
@@ -66,6 +69,7 @@ public class UserServiceImplTests
 		assertThrows(UserIdPasswordInvalidException.class,()->usi.validateUser(u1.getUsername(), u1.getPassword()),"testValidateUserIdPasswordException() should throw exception");
 	}
 	
+	// Test for Removing User
 	@Test
 	void testRemoveUser() 
 	{
@@ -78,6 +82,7 @@ public class UserServiceImplTests
 		assertTrue(u.toString().equals(u1.toString()));
 	}
 	
+	// Test for ValidateUserNotFoundException
 	@Test
 	void testValidateUserNotFoundException() 
 	{
@@ -89,6 +94,7 @@ public class UserServiceImplTests
 		assertThrows(UserNotFoundException.class,()->usi.validateUser(u1.getUsername(),u1.getPassword()),"testValidateUserNotFoundException() method should throw Exception");
 	}
 	
+	// Test for RemoveUserNotFoundException
 	@Test
 	void testRemoveUserNotFoundException() 
 	{
