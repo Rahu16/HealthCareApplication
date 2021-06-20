@@ -44,17 +44,19 @@ public class DiagnosticCenter
 	@Email(message = "Email must be a valid email address")
 	private String contactEmail;
     @ManyToMany()
-	@JoinTable(name="dcenter_dtest",
+	@JoinTable(name="dcenter_dtest",                            // join table name will be dcenter_dtest
 		joinColumns = {@JoinColumn(name = "dcenter_id")}, 
 		inverseJoinColumns = {@JoinColumn(name = "dtest_id")})
 
 	private Set<DiagnosticTest> tests = new HashSet<>();
 	
+    //Constructor without parameters
 	public DiagnosticCenter() 
 	{
 		super();
 	}
 	
+	//constructor with parameters
 	public DiagnosticCenter(int id, String name, String contactNo, String address, String contactEmail) 
 	{
 		super();

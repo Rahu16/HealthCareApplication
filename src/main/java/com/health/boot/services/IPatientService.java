@@ -11,7 +11,4 @@ public interface IPatientService
 	Patient updatePatientDetails(Patient patient);
 	Patient viewPatient(String patientUserName);
 
-	List<TestResult> getAllTestResult(String patientUserName) throws RuntimeException;
-	TestResult viewTestResult(int testResultId) throws RuntimeException;
-	
 }

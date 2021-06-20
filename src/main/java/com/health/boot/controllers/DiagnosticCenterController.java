@@ -36,35 +36,35 @@ public class DiagnosticCenterController
 	@Autowired
 	IDiagnosticTestService dts;
 	
-	
+	/// This controller method returns all the diagnostic centers and by calling getAllDiagnosticCenters method in IDiagnosticCenterService.
 	@GetMapping()
 	public List<DiagnosticCenter> getDiagnosticCenters()
 	{
 		return dcs.getAllDiagnosticCenters();
 	}
 	
-	
+	/// This controller method is used to search the diagnostic center by giving argument as center id. 
 	@GetMapping("{id}")
 	public ResponseEntity<DiagnosticCenter> searchCenter(@PathVariable("id") int id) 
 	{
 		return new ResponseEntity<DiagnosticCenter>(dcs.getDiagnosticCenterById(id),HttpStatus.ACCEPTED);
 	}
 	
-	
+	/// This controller method is used to search the diagnostic center by giving argument as center name. 
 	@GetMapping("searchCenterByName/{centername}")
 	public ResponseEntity<DiagnosticCenter> searchCenterByName(@PathVariable("centername") String name) 
 	{
 		return new ResponseEntity<DiagnosticCenter>(dcs.getDiagnosticCenterByName(name),HttpStatus.ACCEPTED);
 	}
 	
-	
+	/// It returns the test details of particular diagnostic center.
 	@GetMapping("{cid}/{testname}")
 	public ResponseEntity<DiagnosticTest> viewDetails(@PathVariable("cid") int centerId,@PathVariable("testname") String testname) 
 	{
 		return new ResponseEntity<DiagnosticTest>(dcs.viewTestDetails(centerId, testname),HttpStatus.ACCEPTED);
 	}
 	
-	
+	/// It returns all the centers which are having the particular test which is given as argument. 
 	@GetMapping("sortCentersByTestName/{testName}")
 	public ResponseEntity<List> sortCentersByTestName(@PathVariable("testName") String testName)
 	{
@@ -82,7 +82,7 @@ public class DiagnosticCenterController
 		return new ResponseEntity<List>(list,HttpStatus.ACCEPTED);
 	}
 	
-	
+	/// It sorts the centers based on the address given. 
 	@GetMapping("sortCentersByAddress/{address}")
 	public ResponseEntity<List> sortCentersByAddress(@PathVariable("address") String address)
 	{

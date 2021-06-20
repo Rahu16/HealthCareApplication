@@ -53,7 +53,7 @@ public class PatientController
 	@Autowired
 	ITestResultServiceImpl trs;
 	
-
+	/// This controller method is used to register new patient.
 	@PostMapping("/registerPatient")
 	public ResponseEntity<String> registerPatient(@RequestBody Patient p) 
 	{
@@ -61,7 +61,7 @@ public class PatientController
 		return new ResponseEntity<String>("Resgistered Sucessfully",HttpStatus.ACCEPTED);
 	}
 	
-
+	/// This controller method is used to request appointment.
 	@PostMapping("/requestAppointment")
 	public ResponseEntity<Appointment> requestAppoinment(@RequestBody ObjHolderRequestAppointment requestAppoint) 
 	{
@@ -76,13 +76,12 @@ public class PatientController
 		a.setApprovalStatus(ApprovalStatus.pending);
 		a.setPatient(p);
 		a.setDiagnosticCenter(dc);
-//		a.getDiagnosticTests().add(dt);
 		set.add(dt);
 		a.setDiagnosticTests(set);
 		return new ResponseEntity<Appointment>(as.addAppointment(a),HttpStatus.CREATED);
 	}
 
-	
+	/// This controller method is used to get status of appointment.
 	@GetMapping("/{patientName}/{appointmentId}/showstatus")
 	public ResponseEntity<String> showAppointmentStatus(@PathVariable("patientName") String patientName,@PathVariable("appointmentId") int appointmentId) 
 	{
@@ -98,7 +97,7 @@ public class PatientController
 		throw new AppointmentNotFoundException("Appointment is Not Found to See the Status");
 	}
 	
-	
+	/// This method is used to cancel appointment for a particular patient
 	@DeleteMapping("/{patientName}/{appointmentId}")
 	public ResponseEntity<String> cancelAppointment(@PathVariable("patientName") String patientName,@PathVariable("appointmentId") int appointmentId) {
 		ps.viewPatient(patientName);
@@ -124,14 +123,14 @@ public class PatientController
 	
 	}
 	
-	
+	/// This method returns the all test results of a particular patient.
 	@GetMapping("/{patientId}/alltestresults")
 	public ResponseEntity<Set> getAllTestResult(@PathVariable("patientId") int id)
 	{
 		return new ResponseEntity<Set>(trs.viewResultsByPatient(ps.viewPatient(id)),HttpStatus.OK);
 	}
 	
-	
+	/// This method returns all the test results for patient by giving patientId and appointId as argument.
 	@GetMapping("/{patientId}/{appointId}/alltestresults")
 	public ResponseEntity<?> getAllTestResultByAppointment(@PathVariable("patientId") int patientId, @PathVariable("appointId") int appointId)
 	{

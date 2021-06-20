@@ -22,7 +22,7 @@ public class PatientServiceTests
 	@Autowired
 	PatientRepository pr;
 	
-	
+	/// Testing whether the method is creating new patient or not
 	@Test
 	void testRegisterPatient() 
 	{
@@ -31,6 +31,8 @@ public class PatientServiceTests
 		assertTrue(p.getPatientId()==p1.getPatientId());
 	}
 	
+	
+	/// Testing whether the method is throwing PatientExistException, if username is already is existed
 	@Test
 	void testRegisterPatientExistException() 
 	{
@@ -38,6 +40,7 @@ public class PatientServiceTests
 		assertThrows(PatientExistException.class,()-> ps.registerPatient(p),"testRegisterPatientExisttException() should throw Exception");
 	}
 	
+	/// Testing whether the method is updating patient details.
 	@Test
 	void testUpdatePatient() 
 	{
@@ -46,6 +49,8 @@ public class PatientServiceTests
 		assertTrue(p.getName().equals(p1.getName()));
 	}
 	
+	
+	/// Testing whether the method is throwing PatientNotFoundException, if wrong username is given as argument
 	@Test
 	void testUpdatePatientNotFoundException() 
 	{
@@ -53,6 +58,8 @@ public class PatientServiceTests
 		assertThrows(PatientNotFoundException.class,()-> ps.updatePatientDetails(p),"testUpdatePatientNotFoundException() should throw Exception");
 	}
 	
+	
+	/// Testing whether the method is returning patient details or not
 	@Test
 	void testViewPatient() 
 	{
@@ -61,6 +68,8 @@ public class PatientServiceTests
 		assertTrue(p.getPatientId()==p1.getPatientId());
 	}
 	
+	
+	/// Testing whether the method is throwing PatientNotFoundException or not, if unregister patient details is given as argument.
 	@Test
 	void testViewPatientNotFoundException() 
 	{

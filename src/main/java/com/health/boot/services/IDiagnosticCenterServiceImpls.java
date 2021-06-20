@@ -37,12 +37,17 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 	AppointmentRepository ar;
 	
 	
+	/// This method is used to get all Diagnostic Centers.
 	@Override
 	public List<DiagnosticCenter> getAllDiagnosticCenters()
 	{
 		return dcr.findAll();
 	}
 	
+	
+	/* This method is used to create a new Diagnostic Center.
+	 *  If the given given id is already presents then it throws DiagnosticCenterAlReadyExistsException.
+	 */
 	@Override
 	public DiagnosticCenter createDiagnosticCenter(DiagnosticCenter diagnosticCenter) throws DiagnosticCenterAlReadyExistsException
 	{
@@ -59,6 +64,10 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 		}
 	}
 	
+	
+	/* This method is used to search the Diagnostic Center by giving centerId as argument.
+	 * It throws DiagnosticCenterNotFoundException, if there is no diagnostic center with the given id.
+	 */
 	@Override
 	public DiagnosticCenter getDiagnosticCenterById(int diagnosticCenterId) 
 	{
@@ -70,6 +79,10 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 		return dc.get();
 	}
 	
+	
+	/* This method is used to search the Diagnostic Center by giving center name as argument.
+	 * It throws DiagnosticCenterNotFoundException, if there is no diagnostic center with the given name.
+	 */
 	@Override
 	public DiagnosticCenter getDiagnosticCenterByName(String centername) 
 	{
@@ -82,6 +95,10 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 		throw new DiagnosticCenterNotFoundException("Dignostic center is not available with name"+centername);
 	}
 	
+	
+	/* This method is used to delete the diagnostic center  by giving center id as argument. 
+	 * It throws DiagnosticCenterNotFoundException, if there is no diagnostic center with the given id.
+	 */
 	@Override
 	public String removeDiagnosticCenter(int id) throws DiagnosticCenterNotFoundException
 	{
@@ -95,6 +112,11 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 			throw new DiagnosticCenterNotFoundException("Dignostic center is not found with "+id);
 	}
 	
+	
+	/*  This method is used to add a test inside the center by giving test id and center id as argument.
+	 *  It throws DiagnosticTestNotFoundException, if test id is not found in data base.
+	 *  It throws DiagnosticCenterNotFoundException, if center id is not found in data base.
+	 */ 
 	@Override
 	public String addTestInCenter(int testId,int centerId) 
 	{
@@ -110,6 +132,10 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 		return "Added";
 	}
 	
+	
+	/* This method is used to update the diagnostic center details.
+	 * It throws DiagnosticCenterNotFoundException, if the center id in the object argument is not found.
+	 */
 	@Override
 	public String updateDiagnosticCenter(DiagnosticCenter diagnosticCenter) 
 	{
@@ -123,6 +149,11 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 		return "Updated";
 	}
 	
+	
+	/*  It returns the test details in a particular center.
+	 *  It throws the DiagnosticCenterNotFoundException, if the center id is not found.
+	 *  It throws the DiagnosticTestNotFoundException, if the test name is not present inside the center.
+	 */
 	@Override
 	public DiagnosticTest viewTestDetails(int centerId, String testName) 
 	{
@@ -143,6 +174,10 @@ public class IDiagnosticCenterServiceImpls implements IDiagnosticCenterService
 		throw new DiagnosticTestNotFoundException("Test not found with name as "+testName+" in the center.");
 	}
 	
+	
+	/*  It returns the list of all appointments in a particular center.
+	 * 
+	 */
 	@Override
 	public List<Appointment> getListOfAppointments(String centerName)
 	{

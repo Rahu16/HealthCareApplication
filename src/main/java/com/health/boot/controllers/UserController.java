@@ -19,7 +19,7 @@ import com.health.boot.exceptions.UserAlreadyExistException;
 import com.health.boot.exceptions.UserIdPasswordInvalidException;
 import com.health.boot.services.IUserService;
 
-
+/// UserController
 @RestController
 @RequestMapping("user")
 public class UserController 
@@ -29,7 +29,7 @@ public class UserController
 	@Autowired
 	IUserService uService;
 	
-	
+	/// This controller method is used to login and it calls validateUser method of IUserService 
 	@PostMapping("/login")
 	public ResponseEntity<String> signIn(@RequestBody ObjHolder obj)
 	{
@@ -37,9 +37,9 @@ public class UserController
 		String password = obj.getPassword();
 		User u = uService.validateUser(username, password);
 		return new ResponseEntity<String>("Logged In",HttpStatus.ACCEPTED);
-}
+	}
 	
-	
+	/// This controller method is used for signingup as new user and it calls the addUser method of IUserService.
 	@PostMapping("/signUp")
 	public ResponseEntity<String> signUp(@RequestBody User user)
 	{
@@ -47,7 +47,7 @@ public class UserController
 		return new ResponseEntity<String>("Sign Up Sucessfull",HttpStatus.ACCEPTED);
 		}
 	
-	
+	/// This controller method is used to delete existing user and it calls the removeUser method of IUserService.
 	@DeleteMapping("/deleteUser")
 	public ResponseEntity<String> deleteUser(@RequestBody ObjHolder obj)
 	{
