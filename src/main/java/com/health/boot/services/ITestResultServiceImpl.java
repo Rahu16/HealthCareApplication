@@ -66,7 +66,6 @@ public class ITestResultServiceImpl implements ITestResultService
 		int appointId = trOptional.get().getAppointment().getId();
 		Appointment a = ar.findById(appointId).get();
 		a.getTestResult().remove(trOptional.get());
-//		testresultRepo.deleteById(id);
 		ar.save(a);
 		return trOptional.get();	
 	}

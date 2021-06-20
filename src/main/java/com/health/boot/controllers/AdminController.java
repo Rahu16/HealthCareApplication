@@ -1,8 +1,6 @@
 package com.health.boot.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -60,6 +58,7 @@ public class AdminController
 	PatientRepository pr;
 	
 	
+	/// This controller method is responsible for creating a new Diagnostic Center
 	@PostMapping("/newDiagnosticCenter")
 	public ResponseEntity<DiagnosticCenter> createNewDiagnosticCenter(@Valid @RequestBody DiagnosticCenter dc)
 	{
@@ -74,6 +73,7 @@ public class AdminController
 	}
 	
 	
+	/// This method is responsible for Update the Test Details of a Diagnostic Test
 	@PutMapping("/updateTestDetails")
 	public ResponseEntity<DiagnosticTest> updateTestDetails(@Valid @RequestBody DiagnosticTest test)
 	{
@@ -81,6 +81,7 @@ public class AdminController
 	}
 	
 	
+	/// This method is responsible for updating the center details of a Diagnostic Center
 	@PutMapping("/updateCenterDetails")
 	public ResponseEntity<String> updateCenterDetails(@Valid @RequestBody DiagnosticCenter dc)
 	{
@@ -88,6 +89,7 @@ public class AdminController
 	}
 	
 	
+	/// This method is responsible for adding a Diagnostic Test in a Diagnostic Center
 	@PutMapping("/addTestInCenter/{tid}/{cid}")
 	public ResponseEntity<String> addTestInCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid)
 	{
@@ -95,6 +97,7 @@ public class AdminController
 	}
 	
 	
+	/// This method is responsible for Deleting a Diagnostic Test from a Diagnostic Center
 	@PutMapping("/delTestFromCenter/{cid}/{tid}")
 	public ResponseEntity<DiagnosticTest> delTestFromCenter(@PathVariable("cid") int cid,@PathVariable("tid") int tid)
 	{
@@ -102,6 +105,7 @@ public class AdminController
 	}
 	
 	
+	/// This method is responsible for Deleting a Diagnostic Center through center id
 	@DeleteMapping("/deleteDiagnosticCenter/{id}")
 	public ResponseEntity<String> deleteDiagnosticCenter(@PathVariable("id") int id) 
 	{
@@ -109,6 +113,7 @@ public class AdminController
 	}
 	
 	
+	/// This method is responsible for changing the appointment status of an appointment by Admin
 	@PutMapping("/changeAppointmentStatus/{appointId}/{status}")
 	public ResponseEntity<String> changeStatus(@PathVariable("appointId") int appointId, @PathVariable("status") ApprovalStatus status)
 	{
@@ -119,13 +124,7 @@ public class AdminController
 	}
 	
 	
-	@GetMapping("/getalltestResults")
-	public ResponseEntity<List> getAllTestResults()
-	{
-		return new ResponseEntity<List>(trs.getAllTestResults(),HttpStatus.FOUND);
-	}
-	
-	
+	/// This controller method is responsible for adding a TestResult to its respective Appointment
 	@PostMapping("/addTestResultToAppointment")
 	public ResponseEntity<String> addTestToAppointment(@Valid @RequestBody addTestResultObjHolder obj)
 	{
@@ -140,6 +139,7 @@ public class AdminController
 	}
 	
 	
+	/// This controller method is passing the client side a list of all appointments holding a particular Status
 	@GetMapping("/getAppointmentList/{status}")
 	public ResponseEntity<List> getAppointmentsByStatus(@PathVariable("status") ApprovalStatus status)
 	{
@@ -147,7 +147,7 @@ public class AdminController
 		return new ResponseEntity<List>(appointmentList.stream().filter(a->a.getApprovalStatus().equals(status)).collect(Collectors.toList()),HttpStatus.FOUND);
 	}
 	
-	
+	/// This controller will give all the patient list
 	@GetMapping("/getAllPatient")
 	public ResponseEntity<List> getAllPatient()
 	{
@@ -155,6 +155,7 @@ public class AdminController
 	}
 	
 	
+	/// This method will remove a patient through the patientId
 	@DeleteMapping("/removePatient/{patientId}")
 	public ResponseEntity<String> deletePatient(@PathVariable("patientId") int id)
 	{
@@ -164,6 +165,7 @@ public class AdminController
 	}
 	
 	
+	/// This method will remove an appointment through id
 	@DeleteMapping("/removeAppointment/{appointId}")
 	public ResponseEntity<String> deleteAppointment(@PathVariable("appointId") int id)
 	{
@@ -172,6 +174,7 @@ public class AdminController
 	}
 	
 	
+	/// This controller method will remove a test_result
 	@DeleteMapping("/removeTestResult/{testId}")
 	public ResponseEntity<String> delete(@PathVariable("testId") int id)
 	{
@@ -179,7 +182,7 @@ public class AdminController
 		return new ResponseEntity<String>("Test Result is Deleted",HttpStatus.ACCEPTED);
 	}
 	
-	
+	/// This controller method will show you a patient details
 	@GetMapping("/show/{id}")
 	public ResponseEntity<Patient> seePatient(@PathVariable("id") int id)
 	{

@@ -19,6 +19,7 @@ import com.health.boot.repository.AppointmentRepository;
 import com.health.boot.repository.PatientRepository;
 
 
+/// This class is for testing all the Appointment Service Implemented methods using Junit 5
 @SpringBootTest
 public class AppointmentServiceTests {
 	
@@ -31,6 +32,8 @@ public class AppointmentServiceTests {
 	@Autowired
 	PatientRepository pr;
 	
+	
+	/// Testing the AddAppointment method
 	@Test
 	void testAddAppointment() {
 		Patient p  =pr.findById(100).get();
@@ -43,6 +46,8 @@ public class AppointmentServiceTests {
 		assertTrue(a.getId()==a2.getId());
 	}
 	
+	
+	/// Testing the View Appointments methods for a particular Patient
 	@Test
 	void testViewAppointments() {
 		
@@ -54,6 +59,8 @@ public class AppointmentServiceTests {
 		assertTrue(set1.size()==set2.size());
 	}
 	
+	
+	/// Testing the viewAppointment method using an Appointment Id
 	@Test
 	void testViewAppointment() {
 		Appointment a = ar.findById(123).get();
@@ -61,6 +68,8 @@ public class AppointmentServiceTests {
 		assertTrue(a.getId()==a2.getId());
 	}
 	
+	
+	/// Testing UpdateAppointment method by changing some details of an appointment
 	@Test
 	void testUpdateAppointment() {
 		Appointment a = ar.findById(123).get();
@@ -69,6 +78,8 @@ public class AppointmentServiceTests {
 		assertTrue(a.getApprovalStatus().equals(a2.getApprovalStatus()));
 	}
 	
+	
+	/// Testing the removeAppointment method
 	@Test
 	void testRemoveAppointment() {
 		Appointment a = ar.findById(300).get();
@@ -76,12 +87,18 @@ public class AppointmentServiceTests {
 		assertTrue(a.getId()==a2.getId());
 	}
 	
+	
+	/// Testing whether the Exception is thrown by addAppointment() method for adding an existing appointment
 	@Test
 	void testAddAppointmentException() {
 		Appointment a = ar.findById(123).get();
 		assertThrows(AppointmentExistException.class,()->as.addAppointment(a),"testAddAppointmentException() method should throw Exception");
 	}
 	
+	
+	/* Checking whether the AppointmentNotFoundException is thrown by 
+	 * RemoveAppointment() for trying to delete an Appointment which is not exist
+	 */
 	@Test
 	void testRemoveAppointmentException() {
 		Appointment a = new Appointment();
@@ -93,17 +110,29 @@ public class AppointmentServiceTests {
 		assertThrows(AppointmentNotFoundException.class,()->as.removeAppointment(a),"testRemoveAppointmentException() method should throw Exception");
 	}
 	
+	
+	/*Testing whether the viewAppointments() method is throwing an 
+	 * PatientNotFound Exception or not ?? When we are trying to
+	 * retrieve all appointment for a Patient who doesn't exist
+	 */
 	@Test
 	void testViewAppointmentsException() {
 		String name= "Rahul";
 		assertThrows(PatientNotFoundException.class,()->as.viewAppointments(name),"testViewAppointmentsException() method should throw Exception");
 	}
 	
+	
+	/* Testing whether ViewAppointment() method is throwing an AppointmentNotFoundException or not ??
+	 * When we are trying to view an appointment which doesn't exist
+	 */
 	@Test
 	void testViewAppointmentException() {
 		assertThrows(AppointmentNotFoundException.class,()->as.viewAppointment(1000),"testViewAppointmentException() method should throw Exception");
 	}
 	
+	
+	/* Testing updateAppointment() method is throwing an Exception or not ??
+	when we are Updating an appointment which doesn't exist*/
 	@Test
 	void testUpdateAppointmentException() {
 		Appointment a = new Appointment();
