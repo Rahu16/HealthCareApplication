@@ -33,7 +33,7 @@ public class ITestResultServiceImpl implements ITestResultService
 	@Autowired
 	PatientRepository pr;
 	
-	
+	//Adding TestResult 
 	@Override
 	public TestResult addTestResult(TestResult tr) 
 	{	
@@ -45,6 +45,7 @@ public class ITestResultServiceImpl implements ITestResultService
 		return testresultRepo.save(tr);
 	}
 
+	//updating TestResult
 	@Override
 	public TestResult updateTestResult(TestResult tr) 
 	{
@@ -57,6 +58,7 @@ public class ITestResultServiceImpl implements ITestResultService
 		return testresultRepo.save(tr);	
 	}
 
+	//removing TestResult By id
 	@Override
 	public TestResult removeTestResult(int id) 
 	{
@@ -70,6 +72,7 @@ public class ITestResultServiceImpl implements ITestResultService
 		return trOptional.get();	
 	}
 
+	//List out TestResults By patientid
 	@Override
 	public Set<TestResult> viewResultsByPatient(Patient patient) 
 	{
@@ -83,6 +86,7 @@ public class ITestResultServiceImpl implements ITestResultService
 		return testResultSet;		
 	}
 
+	//List out all TestResults
 	@Override
 	public List<TestResult> getAllTestResults() 
 	{
